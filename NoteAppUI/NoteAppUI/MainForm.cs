@@ -71,5 +71,7 @@ namespace NoteAppUI
                 dataGridView1[4, i].Value = listNotes1.Notes[i].TimeOfLastEdit;
             }
         }
+
+      
     }
 }

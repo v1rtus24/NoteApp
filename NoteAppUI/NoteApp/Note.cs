@@ -11,7 +11,7 @@ namespace NoteApp
    /// <summary>
    /// Класс "Заметка"
    /// </summary>
-    public class Note 
+    public class Note : ICloneable
     {
         /// <summary>
         /// "Название заметки"
@@ -124,6 +124,15 @@ namespace NoteApp
             _timeOfCreation = DateTime.Now;
             _timeOfLastEdit = DateTime.Now;
             
+        }
+
+        /// <summary>
+        /// Метод, который возвращает копию объекта
+        /// </summary>
+        /// <returns></returns>
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
     }
