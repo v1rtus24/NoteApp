@@ -17,11 +17,13 @@ namespace NoteAppUI
 
         Project listNotes = new Project();
         Project listNotes1 = new Project();
+        Note note = new Note();
+        
 
         public MainForm()
         {
             InitializeComponent();
-   
+        
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -29,6 +31,7 @@ namespace NoteAppUI
             try
             {
                 listNotes.Notes.Add(new Note(textBox1.Text, textBox2.Text, (noteCategory)Convert.ToInt32(textBox3.Text)));
+               
             }
             catch(ArgumentException ex)
             {
@@ -53,7 +56,14 @@ namespace NoteAppUI
 
         private void button3_Click(object sender, EventArgs e)
         {
-            ProjectManager.SaveToFile(listNotes);
+            try
+            {
+                ProjectManager.SaveToFile(listNotes);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
       

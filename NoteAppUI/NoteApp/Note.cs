@@ -125,6 +125,7 @@ namespace NoteApp
             _timeOfLastEdit = DateTime.Now;
             
         }
+        public Note() { }
 
         /// <summary>
         /// Метод, который возвращает копию объекта
@@ -132,7 +133,7 @@ namespace NoteApp
         /// <returns></returns>
         public object Clone()
         {
-            return this.MemberwiseClone();
+            return this.Clone();
         }
 
     }
