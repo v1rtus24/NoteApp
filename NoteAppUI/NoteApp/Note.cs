@@ -37,7 +37,11 @@ namespace NoteApp
         /// <summary>
         /// Свойство для поля "Название заметки"
         /// </summary>
-        public string Name { get { return _name; }  
+        public string Name { 
+            get 
+            { 
+                return _name; 
+            }  
             set
             {
                 if (value.Length == 0 )
