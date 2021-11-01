@@ -18,7 +18,16 @@ namespace NoteApp
         /// <summary>
         /// Свойство для поля "_notes"
         /// </summary>
-        public List<Note> Notes { get; set; }
+        public List<Note> Notes {
+            get
+            {
+                return _notes;
+            }
+            set
+            {
+                _notes = value;
+            }
+        }
         
     }
 }

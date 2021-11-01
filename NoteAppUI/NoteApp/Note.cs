@@ -82,7 +82,7 @@ namespace NoteApp
             }
             set
             {
-                if (value.Length == 0 || value == null)
+                if (value.Length == 0)
                 {
                     throw new ArgumentException("Текст заметки пустой!");
                 }
@@ -101,7 +101,11 @@ namespace NoteApp
             get
             {
                 return _timeOfCreation;
-            } 
+            }
+            set
+            {
+                _timeOfCreation = value;
+            }
         }
         /// <summary>
         /// Свойство для поля "Время последнего редактирования"
@@ -112,7 +116,11 @@ namespace NoteApp
             {
                 return _timeOfLastEdit;
             }
-            
+            set 
+            {
+                _timeOfLastEdit = value;
+            }
+
         }
         /// <summary>
         /// Конструктор, для установки значений 
@@ -137,7 +145,7 @@ namespace NoteApp
         /// <returns></returns>
         public object Clone()
         {
-            return this.Clone();
+            return this.MemberwiseClone();
         }
 
     }

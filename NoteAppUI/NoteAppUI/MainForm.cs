@@ -14,74 +14,150 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
-
-        Project listNotes = new Project();
-        Project listNotes1 = new Project();
-        Note note = new Note();
+        public Project project1 { get; set; }
+        public int idNote { get; set; }
         
-
+        
         public MainForm()
         {
             InitializeComponent();
-        
+            
+
+        }
+        private void UpdateListBox()
+        {
+            project1 = ProjectManager.LoadFromFile();
+            NotesListBox.Items.Clear();
+            for (int i = 0; i < project1.Notes.Count; i++)
+            {
+                NotesListBox.Items.Add(project1.Notes[i].Name);
+            }
+        }
+        private void ClearInfo()
+        {
+            TitleLabel.Text = "";
+            notesTextBox.Text = "";
+            CategoryLabel.Text = "";
+        }
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            UpdateListBox();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            try
+            idNote = NotesListBox.SelectedIndex;
+            if (idNote != -1)
             {
-                listNotes.Notes.Add(new Note(textBox1.Text, textBox2.Text, (noteCategory)Convert.ToInt32(textBox3.Text)));
-               
-            }
-            catch(ArgumentException ex)
-            {
-                MessageBox.Show(ex.Message);
+                TitleLabel.Text = project1.Notes[idNote].Name;
+                notesTextBox.Text = project1.Notes[idNote].NoteText;
+                CreatedDateTimePicker.Value = project1.Notes[idNote].TimeOfCreation;
+                ModifiedDateTimePicker.Value = project1.Notes[idNote].TimeOfLastEdit;
+                CategoryLabel.Text = project1.Notes[idNote].NoteCategory.ToString();
+
             }
         }
-        
-        private void button2_Click(object sender, EventArgs e)
+
+        private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
-            for (int i = 0;i < listNotes.Notes.Count; i++)
+                AddEditForm f = new AddEditForm();
+                f.EditNote = false;
+                if (f.ShowDialog() == DialogResult.OK)
                 {
-                    dataGridView1.Rows.Add();
-                    dataGridView1[0, i].Value = listNotes.Notes[i].Name;
-                    dataGridView1[1, i].Value = listNotes.Notes[i].NoteText;
-                    dataGridView1[2, i].Value = listNotes.Notes[i].NoteCategory;
-                    dataGridView1[3, i].Value = listNotes.Notes[i].TimeOfCreation;
-                    dataGridView1[4, i].Value = listNotes.Notes[i].TimeOfLastEdit;            
+                    project1.Notes.Add(f.CurrentNote);
+                    ProjectManager.SaveToFile(project1);
+                    UpdateListBox();
+                    ClearInfo();
                 }
-            
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
+            if (NotesListBox.SelectedIndex != -1)
             {
-                ProjectManager.SaveToFile(listNotes);
+                AddEditForm f = new AddEditForm();
+                f.EditNote = true;
+                f.CurrentNote = project1.Notes[idNote];
+                
+                if (f.ShowDialog() == DialogResult.OK)
+                {
+                    project1.Notes[idNote].Name = f.CurrentNote.Name;
+                    project1.Notes[idNote].NoteText = f.CurrentNote.NoteText;
+                    project1.Notes[idNote].NoteCategory = f.CurrentNote.NoteCategory;
+                    project1.Notes[idNote].TimeOfLastEdit = f.CurrentNote.TimeOfLastEdit;
+                    ProjectManager.SaveToFile(project1);
+                    UpdateListBox();
+                    TitleLabel.Text = project1.Notes[idNote].Name;
+                    notesTextBox.Text = project1.Notes[idNote].NoteText;
+                    CreatedDateTimePicker.Value = project1.Notes[idNote].TimeOfCreation;
+                    ModifiedDateTimePicker.Value = project1.Notes[idNote].TimeOfLastEdit;
+                    CategoryLabel.Text = project1.Notes[idNote].NoteCategory.ToString();
+
+                }
             }
-            catch(Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Не выбрана заметка!");
             }
         }
 
-      
-
-        private void button5_Click(object sender, EventArgs e)
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            listNotes1 = ProjectManager.LoadFromFile();
-            for (int i = 0; i < listNotes1.Notes.Count; i++)
+            AboutForm f = new AboutForm();
+            f.Show();
+        }
+
+        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (NotesListBox.SelectedIndex != -1)
             {
-                dataGridView1.Rows.Add();
-                dataGridView1[0, i].Value = listNotes1.Notes[i].Name;
-                dataGridView1[1, i].Value = listNotes1.Notes[i].NoteText;
-                dataGridView1[2, i].Value = listNotes1.Notes[i].NoteCategory;
-                dataGridView1[3, i].Value = listNotes1.Notes[i].TimeOfCreation;
-                dataGridView1[4, i].Value = listNotes1.Notes[i].TimeOfLastEdit;
+                
+
+                DialogResult result = MessageBox.Show("Do you want to remove this note: " + project1.Notes[idNote].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.OK)
+                {
+                    project1.Notes.Remove(project1.Notes[idNote]);
+                    ClearInfo();
+                    ProjectManager.SaveToFile(project1);
+                    UpdateListBox();
+                }
+
+                if (result == DialogResult.Cancel)
+                {
+                    DialogResult = DialogResult.Cancel;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Не выбрана заметка!");
             }
         }
 
-      
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ProjectManager.SaveToFile(project1);
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ProjectManager.SaveToFile(project1);
+            Application.Exit();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            addNoteToolStripMenuItem_Click(sender, e);
+        }
+
+        private void EditButton_Click(object sender, EventArgs e)
+        {
+            editNoteToolStripMenuItem_Click(sender, e);
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            removeNoteToolStripMenuItem_Click(sender, e);
+        }
     }
 }
