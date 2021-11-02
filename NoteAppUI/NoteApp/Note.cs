@@ -21,12 +21,12 @@ namespace NoteApp
         /// <summary>
         /// "Текст заметки"
         /// </summary>
-        private string _Text;
+        private string _text;
        
         /// <summary>
         /// "Категория заметки"
         /// </summary>
-        private NoteCategory _Category;
+        private NoteCategory _category;
         
         /// <summary>
         /// "Время создания заметки"
@@ -68,12 +68,12 @@ namespace NoteApp
         public  NoteCategory Category {
             get
             {
-                return _Category;
+                return _category;
             }
 
             set
             {
-                _Category = value;
+                _category = value;
             }
         }
         
@@ -84,11 +84,11 @@ namespace NoteApp
         {
             get
             {
-                return _Text;
+                return _text;
             }
             set
             {
-                _Text = value;
+                _text = value;
             }
         }
         /// <summary>
@@ -127,13 +127,13 @@ namespace NoteApp
         /// Конструктор, для установки значений 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="noteText"></param>
-        /// <param name="noteCat"></param>
-        public Note(string name, string noteText, NoteCategory noteCat)
+        /// <param name="Text"></param>
+        /// <param name="Category"></param>
+        public Note(string name, string Text, NoteCategory Category)
         {
             Name = name;
-            Text = noteText;
-            Category = noteCat;
+            this.Text = Text;
+            this.Category = Category;
             _createdTime = DateTime.Now;
             _modifiedTime = DateTime.Now;
             
