@@ -18,7 +18,12 @@ namespace NoteApp
         /// </summary>
         private static readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) 
         + "\\NoteApp\\";
+
+        /// <summary>
+        /// Константа, указывающая имя файла
+        /// </summary>
         private static readonly string FileName = "NoteApp.notes";
+       
         /// <summary>
         /// Метод сохранения данных в файл
         /// </summary>
@@ -39,6 +44,7 @@ namespace NoteApp
                 serializer.Serialize(writer, notes);
             }
         }
+        
         /// <summary>
         /// Метод загрузки данных из файла
         /// </summary>

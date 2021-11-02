@@ -17,18 +17,22 @@ namespace NoteApp
         /// "Название заметки"
         /// </summary>
         private string _name;
+        
         /// <summary>
         /// "Текст заметки"
         /// </summary>
         private string _Text;
+       
         /// <summary>
         /// "Категория заметки"
         /// </summary>
         private NoteCategory _Category;
+        
         /// <summary>
         /// "Время создания заметки"
         /// </summary>
         private DateTime _createdTime;
+        
         /// <summary>
         /// "Время последнего редактирования"
         /// </summary>
@@ -57,6 +61,7 @@ namespace NoteApp
                     _name = value;
             }
         }
+        
         /// <summary>
         /// Свойство для поля "Категория заметки"
         /// </summary>
@@ -71,6 +76,7 @@ namespace NoteApp
                 _Category = value;
             }
         }
+        
         /// <summary>
         /// Свойство для поля "Текст заметки"
         /// </summary>
@@ -100,6 +106,7 @@ namespace NoteApp
                 _createdTime = value;
             }
         }
+       
         /// <summary>
         /// Свойство для поля "Время последнего редактирования"
         /// </summary>
@@ -115,6 +122,7 @@ namespace NoteApp
             }
 
         }
+        
         /// <summary>
         /// Конструктор, для установки значений 
         /// </summary>
@@ -135,6 +143,7 @@ namespace NoteApp
         /// <summary>
         /// Метод, который возвращает копию объекта
         /// </summary>
+       
         /// <returns></returns>
         public object Clone()
         {
