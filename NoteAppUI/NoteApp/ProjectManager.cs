@@ -47,7 +47,7 @@ namespace NoteApp
         {
             if (!Directory.Exists(FolderPath))
             {
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp");
+                Directory.CreateDirectory(FolderPath);
             }
             if (!File.Exists(FileName))
             {
