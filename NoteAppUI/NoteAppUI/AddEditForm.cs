@@ -52,7 +52,7 @@ namespace NoteAppUI
                     CurrentNote.Name = titleTextBox.Text;
                 CurrentNote.NoteText = noteTextTextBox.Text;
                 CurrentNote.NoteCategory = (noteCategory)comboBox1.SelectedIndex;
-                CurrentNote.TimeOfLastEdit = DateTime.Now;
+                CurrentNote.ModifiedTime = DateTime.Now;
                 DialogResult = DialogResult.OK;
                 }
                 catch (ArgumentException ex)
@@ -69,8 +69,8 @@ namespace NoteAppUI
                 titleTextBox.Text = CurrentNote.Name;
                 noteTextTextBox.Text = CurrentNote.NoteText;
                 comboBox1.Text = CurrentNote.NoteCategory.ToString();
-                dateTimePicker1.Value = CurrentNote.TimeOfCreation;
-                dateTimePicker2.Value = CurrentNote.TimeOfLastEdit;
+                dateTimePicker1.Value = CurrentNote.CreatedTime;
+                dateTimePicker2.Value = CurrentNote.ModifiedTime;
             }
         }
 

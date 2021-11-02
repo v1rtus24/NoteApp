@@ -14,20 +14,7 @@ namespace NoteApp
         /// <summary>
         /// Список заметок
         /// </summary>
-        private List<Note> _notes = new List<Note>();
-        /// <summary>
-        /// Свойство для поля "_notes"
-        /// </summary>
-        public List<Note> Notes {
-            get
-            {
-                return _notes;
-            }
-            set
-            {
-                _notes = value;
-            }
-        }
-        
+        public List<Note> Notes { get; set; } = new List<Note>();
+
     }
 }

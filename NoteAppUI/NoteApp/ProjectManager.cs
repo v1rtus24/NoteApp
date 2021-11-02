@@ -16,20 +16,22 @@ namespace NoteApp
         /// <summary>
         /// Константа, указывающая путь к файлу
         /// </summary>
-        private static readonly string _file = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp\\NoteApp.notes";
+        private static readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) 
+        + "\\NoteApp\\";
+        private static readonly string FileName = "NoteApp.notes";
         /// <summary>
         /// Метод сохранения данных в файл
         /// </summary>
         /// <param name="notes"></param>
         public static void SaveToFile(Project notes)
         {
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp"))
+            if (!Directory.Exists(FolderPath))
             {
-                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp");
+                Directory.CreateDirectory(FileName);
             }
             JsonSerializer serializer = new JsonSerializer();
             //Открываем поток для записи в файл с указанием пути
-            using (StreamWriter sw = new StreamWriter(_file))
+            using (StreamWriter sw = new StreamWriter(FolderPath + FileName))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 //Вызываем сериализацию и передаем объект, который хотим сериализовать
@@ -42,17 +44,17 @@ namespace NoteApp
         /// <returns></returns>
         public static Project LoadFromFile()
         {
-            if (!Directory.Exists(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp"))
+            if (!Directory.Exists(FolderPath))
             {
                 Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\NoteApp");
             }
-            if (!File.Exists(_file))
+            if (!File.Exists(FileName))
             {
                 return new Project();
             }
             JsonSerializer serializer = new JsonSerializer();
             //Открываем поток для чтения из файла с указанием пути
-            using (StreamReader sr = new StreamReader(_file))
+            using (StreamReader sr = new StreamReader(FolderPath + FileName))
             using (JsonReader reader = new JsonTextReader(sr))
             {
                 //Вызываем десериализацию и явно преобразуем результат в целевой тип данных

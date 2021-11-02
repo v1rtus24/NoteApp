@@ -28,11 +28,11 @@ namespace NoteApp
         /// <summary>
         /// "Время создания заметки"
         /// </summary>
-        private DateTime _timeOfCreation;
+        private DateTime _createdTime;
         /// <summary>
         /// "Время последнего редактирования"
         /// </summary>
-        private DateTime _timeOfLastEdit;
+        private DateTime _modifiedTime;
 
         /// <summary>
         /// Свойство для поля "Название заметки"
@@ -82,43 +82,36 @@ namespace NoteApp
             }
             set
             {
-                if (value.Length == 0)
-                {
-                    throw new ArgumentException("Текст заметки пустой!");
-                }
-                else
-                {
-                    _noteText = value;
-                }
+                _noteText = value;
             }
         }
         /// <summary>
         /// Свойство для поля "Время создания заметки"
         /// </summary>
 
-        public DateTime TimeOfCreation { 
+        public DateTime CreatedTime { 
 
             get
             {
-                return _timeOfCreation;
+                return _createdTime;
             }
             set
             {
-                _timeOfCreation = value;
+                _createdTime = value;
             }
         }
         /// <summary>
         /// Свойство для поля "Время последнего редактирования"
         /// </summary>
-        public DateTime TimeOfLastEdit
+        public DateTime ModifiedTime
         {
             get
             {
-                return _timeOfLastEdit;
+                return _modifiedTime;
             }
             set 
             {
-                _timeOfLastEdit = value;
+                _modifiedTime = value;
             }
 
         }
@@ -133,8 +126,8 @@ namespace NoteApp
             Name = name;
             NoteText = noteText;
             NoteCategory = noteCat;
-            _timeOfCreation = DateTime.Now;
-            _timeOfLastEdit = DateTime.Now;
+            _createdTime = DateTime.Now;
+            _modifiedTime = DateTime.Now;
             
         }
         public Note() { }
