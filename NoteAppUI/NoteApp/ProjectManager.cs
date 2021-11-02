@@ -29,6 +29,7 @@ namespace NoteApp
             {
                 Directory.CreateDirectory(FileName);
             }
+
             JsonSerializer serializer = new JsonSerializer();
             //Открываем поток для записи в файл с указанием пути
             using (StreamWriter sw = new StreamWriter(FolderPath + FileName))
@@ -52,13 +53,20 @@ namespace NoteApp
             {
                 return new Project();
             }
-            JsonSerializer serializer = new JsonSerializer();
-            //Открываем поток для чтения из файла с указанием пути
-            using (StreamReader sr = new StreamReader(FolderPath + FileName))
-            using (JsonReader reader = new JsonTextReader(sr))
+            try
             {
-                //Вызываем десериализацию и явно преобразуем результат в целевой тип данных
-                return (Project)serializer.Deserialize<Project>(reader);
+                JsonSerializer serializer = new JsonSerializer();
+                //Открываем поток для чтения из файла с указанием пути
+                using (StreamReader sr = new StreamReader(FolderPath + FileName))
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    //Вызываем десериализацию и явно преобразуем результат в целевой тип данных
+                    return (Project)serializer.Deserialize<Project>(reader);
+                }
+            }
+            catch
+            {
+                return new Project();
             }
         }
     }
