@@ -9,7 +9,7 @@ namespace NoteApp
     /// <summary>
     /// Перечисление "Категория заметки"
     /// </summary>
-    public enum noteCategory
+    public enum NoteCategory
     {
         /// <summary>
         /// Категория "Работа"

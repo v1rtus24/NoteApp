@@ -20,11 +20,11 @@ namespace NoteApp
         /// <summary>
         /// "Текст заметки"
         /// </summary>
-        private string _noteText;
+        private string _Text;
         /// <summary>
         /// "Категория заметки"
         /// </summary>
-        private noteCategory _noteCategory;
+        private NoteCategory _Category;
         /// <summary>
         /// "Время создания заметки"
         /// </summary>
@@ -60,29 +60,29 @@ namespace NoteApp
         /// <summary>
         /// Свойство для поля "Категория заметки"
         /// </summary>
-        public  noteCategory NoteCategory {
+        public  NoteCategory Category {
             get
             {
-                return _noteCategory;
+                return _Category;
             }
 
             set
             {
-                _noteCategory = value;
+                _Category = value;
             }
         }
         /// <summary>
         /// Свойство для поля "Текст заметки"
         /// </summary>
-        public string NoteText
+        public string Text
         {
             get
             {
-                return _noteText;
+                return _Text;
             }
             set
             {
-                _noteText = value;
+                _Text = value;
             }
         }
         /// <summary>
@@ -121,11 +121,11 @@ namespace NoteApp
         /// <param name="name"></param>
         /// <param name="noteText"></param>
         /// <param name="noteCat"></param>
-        public Note(string name, string noteText, noteCategory noteCat)
+        public Note(string name, string noteText, NoteCategory noteCat)
         {
             Name = name;
-            NoteText = noteText;
-            NoteCategory = noteCat;
+            Text = noteText;
+            Category = noteCat;
             _createdTime = DateTime.Now;
             _modifiedTime = DateTime.Now;
             

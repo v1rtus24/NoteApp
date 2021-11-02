@@ -18,13 +18,13 @@ namespace NoteAppUI
         public AddEditForm()
         {
             InitializeComponent();
-            comboBox1.Items.Add(noteCategory.Work.ToString());
-            comboBox1.Items.Add(noteCategory.Home.ToString());
-            comboBox1.Items.Add(noteCategory.HealthAndSports.ToString());
-            comboBox1.Items.Add(noteCategory.People.ToString());
-            comboBox1.Items.Add(noteCategory.Documents.ToString());
-            comboBox1.Items.Add(noteCategory.Finance.ToString());
-            comboBox1.Items.Add(noteCategory.Other.ToString());
+            comboBox1.Items.Add(NoteCategory.Work.ToString());
+            comboBox1.Items.Add(NoteCategory.Home.ToString());
+            comboBox1.Items.Add(NoteCategory.HealthAndSports.ToString());
+            comboBox1.Items.Add(NoteCategory.People.ToString());
+            comboBox1.Items.Add(NoteCategory.Documents.ToString());
+            comboBox1.Items.Add(NoteCategory.Finance.ToString());
+            comboBox1.Items.Add(NoteCategory.Other.ToString());
 
 
         }
@@ -36,7 +36,7 @@ namespace NoteAppUI
             {
                 try
                 {
-                    var curentCategory = (noteCategory)comboBox1.SelectedIndex;
+                    var curentCategory = (NoteCategory)comboBox1.SelectedIndex;
                     CurrentNote = new Note(titleTextBox.Text, noteTextTextBox.Text, curentCategory);
                     DialogResult = DialogResult.OK;
                 }
@@ -50,8 +50,8 @@ namespace NoteAppUI
                 try
                 {
                     CurrentNote.Name = titleTextBox.Text;
-                CurrentNote.NoteText = noteTextTextBox.Text;
-                CurrentNote.NoteCategory = (noteCategory)comboBox1.SelectedIndex;
+                CurrentNote.Text = noteTextTextBox.Text;
+                CurrentNote.Category = (NoteCategory)comboBox1.SelectedIndex;
                 CurrentNote.ModifiedTime = DateTime.Now;
                 DialogResult = DialogResult.OK;
                 }
@@ -67,8 +67,8 @@ namespace NoteAppUI
             if (EditNote == true)
             {
                 titleTextBox.Text = CurrentNote.Name;
-                noteTextTextBox.Text = CurrentNote.NoteText;
-                comboBox1.Text = CurrentNote.NoteCategory.ToString();
+                noteTextTextBox.Text = CurrentNote.Text;
+                comboBox1.Text = CurrentNote.Category.ToString();
                 dateTimePicker1.Value = CurrentNote.CreatedTime;
                 dateTimePicker2.Value = CurrentNote.ModifiedTime;
             }
