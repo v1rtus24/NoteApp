@@ -16,5 +16,19 @@ namespace NoteAppUI
         {
             InitializeComponent();
         }
+
+        private void linkLabel1_LinkClicked(object sender, EventArgs e)
+        {
+            var url = linkLabel1.Text; 
+            System.Diagnostics.Process.Start("chrome.exe", url);
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var url = linkLabel2.Text;
+            System.Diagnostics.Process.Start("chrome.exe", url);
+        }
+
+
     }
 }

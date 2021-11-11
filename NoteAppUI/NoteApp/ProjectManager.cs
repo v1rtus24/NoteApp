@@ -32,9 +32,12 @@ namespace NoteApp
         {
             if (!Directory.Exists(FolderPath))
             {
-                Directory.CreateDirectory(FileName);
+                Directory.CreateDirectory(FolderPath);
             }
-
+            if (!File.Exists(FileName))
+            {
+                File.Create(FileName);
+            }
             JsonSerializer serializer = new JsonSerializer();
             //Открываем поток для записи в файл с указанием пути
             using (StreamWriter sw = new StreamWriter(FolderPath + FileName))

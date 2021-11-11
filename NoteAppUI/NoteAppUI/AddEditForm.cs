@@ -36,9 +36,16 @@ namespace NoteAppUI
             {
                 try
                 {
-                    var curentCategory = (NoteCategory)comboBox1.SelectedIndex;
+                    if (comboBox1.SelectedIndex != -1)
+                    {
+                        var curentCategory = (NoteCategory)comboBox1.SelectedIndex;
                     CurrentNote = new Note(titleTextBox.Text, noteTextTextBox.Text, curentCategory);
                     DialogResult = DialogResult.OK;
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не выбрана категория заметки!");
+                    }
                 }
                 catch(ArgumentException ex)
                 {
@@ -49,11 +56,12 @@ namespace NoteAppUI
             {
                 try
                 {
-                    CurrentNote.Name = titleTextBox.Text;
-                CurrentNote.Text = noteTextTextBox.Text;
-                CurrentNote.Category = (NoteCategory)comboBox1.SelectedIndex;
-                CurrentNote.ModifiedTime = DateTime.Now;
-                DialogResult = DialogResult.OK;
+                        CurrentNote.Name = titleTextBox.Text;
+                        CurrentNote.Text = noteTextTextBox.Text;
+                        CurrentNote.Category = (NoteCategory)comboBox1.SelectedIndex;
+                        CurrentNote.ModifiedTime = DateTime.Now;
+                        DialogResult = DialogResult.OK;
+                   
                 }
                 catch (ArgumentException ex)
                 {
@@ -78,5 +86,7 @@ namespace NoteAppUI
         {
             this.Close();
         }
+
+
     }
 }
