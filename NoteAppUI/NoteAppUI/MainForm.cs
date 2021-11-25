@@ -14,8 +14,8 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
-        public Project project1 { get; set; }
-        public int idNote { get; set; }
+        public Project Project1 { get; set; }
+        public int IdNote { get; set; }
         
         
         public MainForm()
@@ -26,11 +26,11 @@ namespace NoteAppUI
         }
         private void UpdateListBox()
         {
-            project1 = ProjectManager.LoadFromFile();
+            Project1 = ProjectManager.LoadFromFile();
             NotesListBox.Items.Clear();
-            for (int i = 0; i < project1.Notes.Count; i++)
+            for (int i = 0; i < Project1.Notes.Count; i++)
             {
-                NotesListBox.Items.Add(project1.Notes[i].Name);
+                NotesListBox.Items.Add(Project1.Notes[i].Name);
             }
         }
         private void ClearInfo()
@@ -41,19 +41,20 @@ namespace NoteAppUI
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
+            ClearInfo();
             UpdateListBox();
         }
 
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            idNote = NotesListBox.SelectedIndex;
-            if (idNote != -1)
+            IdNote = NotesListBox.SelectedIndex;
+            if (IdNote != -1)
             {
-                TitleLabel.Text = project1.Notes[idNote].Name;
-                notesTextBox.Text = project1.Notes[idNote].Text;
-                CreatedDateTimePicker.Value = project1.Notes[idNote].CreatedTime;
-                ModifiedDateTimePicker.Value = project1.Notes[idNote].ModifiedTime;
-                CategoryLabel.Text = project1.Notes[idNote].Category.ToString();
+                TitleLabel.Text = Project1.Notes[IdNote].Name;
+                notesTextBox.Text = Project1.Notes[IdNote].Text;
+                CreatedDateTimePicker.Value = Project1.Notes[IdNote].CreatedTime;
+                ModifiedDateTimePicker.Value = Project1.Notes[IdNote].ModifiedTime;
+                CategoryLabel.Text = Project1.Notes[IdNote].Category.ToString();
 
             }
         }
@@ -64,8 +65,8 @@ namespace NoteAppUI
                 f.EditNote = false;
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-                    project1.Notes.Add(f.CurrentNote);
-                    ProjectManager.SaveToFile(project1);
+                    Project1.Notes.Add(f.CurrentNote);
+                    ProjectManager.SaveToFile(Project1);
                     UpdateListBox();
                     ClearInfo();
                 }
@@ -77,22 +78,21 @@ namespace NoteAppUI
             {
                 AddEditForm f = new AddEditForm();
                 f.EditNote = true;
-                f.CurrentNote = project1.Notes[idNote];
+                f.CurrentNote = Project1.Notes[IdNote];
                 
                 if (f.ShowDialog() == DialogResult.OK)
                 {
-                    project1.Notes[idNote].Name = f.CurrentNote.Name;
-                    project1.Notes[idNote].Text = f.CurrentNote.Text;
-                    project1.Notes[idNote].Category = f.CurrentNote.Category;
-                    project1.Notes[idNote].ModifiedTime = f.CurrentNote.ModifiedTime;
-                    ProjectManager.SaveToFile(project1);
+                    Project1.Notes[IdNote].Name = f.CurrentNote.Name;
+                    Project1.Notes[IdNote].Text = f.CurrentNote.Text;
+                    Project1.Notes[IdNote].Category = f.CurrentNote.Category;
+                    Project1.Notes[IdNote].ModifiedTime = f.CurrentNote.ModifiedTime;
+                    ProjectManager.SaveToFile(Project1);
                     UpdateListBox();
-                    TitleLabel.Text = project1.Notes[idNote].Name;
-                    notesTextBox.Text = project1.Notes[idNote].Text;
-                    CreatedDateTimePicker.Value = project1.Notes[idNote].CreatedTime;
-                    ModifiedDateTimePicker.Value = project1.Notes[idNote].ModifiedTime;
-                    CategoryLabel.Text = project1.Notes[idNote].Category.ToString();
-
+                    TitleLabel.Text = Project1.Notes[IdNote].Name;
+                    notesTextBox.Text = Project1.Notes[IdNote].Text;
+                    CreatedDateTimePicker.Value = Project1.Notes[IdNote].CreatedTime;
+                    ModifiedDateTimePicker.Value = Project1.Notes[IdNote].ModifiedTime;
+                    CategoryLabel.Text = Project1.Notes[IdNote].Category.ToString();
                 }
             }
             else
@@ -111,15 +111,14 @@ namespace NoteAppUI
         {
             if (NotesListBox.SelectedIndex != -1)
             {
-                
 
-                DialogResult result = MessageBox.Show("Do you want to remove this note: " + project1.Notes[idNote].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Do you want to remove this note: " + Project1.Notes[IdNote].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.OK)
                 {
-                    project1.Notes.Remove(project1.Notes[idNote]);
+                    Project1.Notes.Remove(Project1.Notes[IdNote]);
                     ClearInfo();
-                    ProjectManager.SaveToFile(project1);
+                    ProjectManager.SaveToFile(Project1);
                     UpdateListBox();
                 }
 
@@ -136,12 +135,12 @@ namespace NoteAppUI
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ProjectManager.SaveToFile(project1);
+            ProjectManager.SaveToFile(Project1);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectManager.SaveToFile(project1);
+            ProjectManager.SaveToFile(Project1);
             Application.Exit();
         }
 

@@ -18,25 +18,6 @@ namespace NoteApp
         /// </summary>
         private string _name;
         
-        /// <summary>
-        /// "Текст заметки"
-        /// </summary>
-        private string _text;
-       
-        /// <summary>
-        /// "Категория заметки"
-        /// </summary>
-        private NoteCategory _category;
-        
-        /// <summary>
-        /// "Время создания заметки"
-        /// </summary>
-        private DateTime _createdTime;
-        
-        /// <summary>
-        /// "Время последнего редактирования"
-        /// </summary>
-        private DateTime _modifiedTime;
 
         /// <summary>
         /// Свойство для поля "Название заметки"
@@ -61,81 +42,41 @@ namespace NoteApp
                     _name = value;
             }
         }
-        
+
         /// <summary>
         /// Свойство для поля "Категория заметки"
         /// </summary>
-        public  NoteCategory Category {
-            get
-            {
-                return _category;
-            }
+        public NoteCategory Category { get; set; }
 
-            set
-            {
-                _category = value;
-            }
-        }
-        
         /// <summary>
         /// Свойство для поля "Текст заметки"
         /// </summary>
-        public string Text
-        {
-            get
-            {
-                return _text;
-            }
-            set
-            {
-                _text = value;
-            }
-        }
+        public string Text { get; set; }
         /// <summary>
         /// Свойство для поля "Время создания заметки"
         /// </summary>
 
-        public DateTime CreatedTime { 
+        public DateTime CreatedTime { get; set; }
 
-            get
-            {
-                return _createdTime;
-            }
-            set
-            {
-                _createdTime = value;
-            }
-        }
-       
         /// <summary>
         /// Свойство для поля "Время последнего редактирования"
         /// </summary>
-        public DateTime ModifiedTime
-        {
-            get
-            {
-                return _modifiedTime;
-            }
-            set 
-            {
-                _modifiedTime = value;
-            }
-
-        }
+        public DateTime ModifiedTime { get; set; }
+        
         
         /// <summary>
         /// Конструктор, для установки значений 
         /// </summary>
         /// <param name="name"></param>
-        /// <param name="Text"></param>
-        /// <param name="Category"></param>
-        public Note(string name, string Text, NoteCategory Category)
+        /// <param name="text"></param>
+        /// <param name="category"></param>
+        public Note(string name, string text, NoteCategory category)
         {
-            Name = name;
-            this.Text = Text;
-            this.Category = Category;
-            _createdTime = DateTime.Now;
-            _modifiedTime = DateTime.Now;
+            this.Name = name;
+            this.Text = text;
+            this.Category = category;
+            ModifiedTime = DateTime.Now;
+            CreatedTime = DateTime.Now;
             
         }
         public Note() { }

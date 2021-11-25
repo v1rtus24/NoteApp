@@ -25,8 +25,6 @@ namespace NoteAppUI
             comboBox1.Items.Add(NoteCategory.Documents.ToString());
             comboBox1.Items.Add(NoteCategory.Finance.ToString());
             comboBox1.Items.Add(NoteCategory.Other.ToString());
-
-
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -38,7 +36,7 @@ namespace NoteAppUI
                 {
                     if (comboBox1.SelectedIndex != -1)
                     {
-                        var curentCategory = (NoteCategory)comboBox1.SelectedIndex;
+                    NoteCategory curentCategory = (NoteCategory)comboBox1.SelectedIndex;
                     CurrentNote = new Note(titleTextBox.Text, noteTextTextBox.Text, curentCategory);
                     DialogResult = DialogResult.OK;
                     }
