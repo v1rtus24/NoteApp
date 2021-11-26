@@ -51,12 +51,12 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.noteTextTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.noteTextTextBox.Location = new System.Drawing.Point(11, 102);
-            this.noteTextTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.noteTextTextBox.Location = new System.Drawing.Point(11, 98);
+            this.noteTextTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.noteTextTextBox.Multiline = true;
             this.noteTextTextBox.Name = "noteTextTextBox";
             this.noteTextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.noteTextTextBox.Size = new System.Drawing.Size(532, 385);
+            this.noteTextTextBox.Size = new System.Drawing.Size(532, 389);
             this.noteTextTextBox.TabIndex = 1;
             // 
             // okButton
@@ -99,7 +99,7 @@ namespace NoteAppUI
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(85, 38);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(154, 24);
             this.comboBox1.TabIndex = 17;

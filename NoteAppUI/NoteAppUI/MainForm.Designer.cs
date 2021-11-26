@@ -175,7 +175,7 @@ namespace NoteAppUI
             this.DeleteButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.DeleteButton.FlatAppearance.BorderSize = 0;
             this.DeleteButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.DeleteButton.Location = new System.Drawing.Point(93, 458);
+            this.DeleteButton.Location = new System.Drawing.Point(86, 467);
             this.DeleteButton.Margin = new System.Windows.Forms.Padding(2);
             this.DeleteButton.Name = "DeleteButton";
             this.DeleteButton.Size = new System.Drawing.Size(38, 38);
@@ -190,7 +190,7 @@ namespace NoteAppUI
             this.EditButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.EditButton.FlatAppearance.BorderSize = 0;
             this.EditButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.EditButton.Location = new System.Drawing.Point(51, 458);
+            this.EditButton.Location = new System.Drawing.Point(44, 467);
             this.EditButton.Margin = new System.Windows.Forms.Padding(2);
             this.EditButton.Name = "EditButton";
             this.EditButton.Size = new System.Drawing.Size(38, 38);
@@ -205,7 +205,7 @@ namespace NoteAppUI
             this.AddButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.AddButton.FlatAppearance.BorderSize = 0;
             this.AddButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.AddButton.Location = new System.Drawing.Point(9, 458);
+            this.AddButton.Location = new System.Drawing.Point(2, 467);
             this.AddButton.Margin = new System.Windows.Forms.Padding(2);
             this.AddButton.Name = "AddButton";
             this.AddButton.Size = new System.Drawing.Size(38, 38);
@@ -219,7 +219,7 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(6, 14);
+            this.label1.Location = new System.Drawing.Point(4, 8);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(107, 17);
@@ -232,10 +232,10 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(115, 11);
+            this.comboBox1.Location = new System.Drawing.Point(115, 5);
             this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(149, 25);
+            this.comboBox1.Size = new System.Drawing.Size(151, 25);
             this.comboBox1.TabIndex = 1;
             this.comboBox1.Text = "All";
             // 
@@ -247,10 +247,10 @@ namespace NoteAppUI
             this.NotesListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.NotesListBox.FormattingEnabled = true;
             this.NotesListBox.ItemHeight = 17;
-            this.NotesListBox.Location = new System.Drawing.Point(9, 51);
+            this.NotesListBox.Location = new System.Drawing.Point(2, 34);
             this.NotesListBox.Margin = new System.Windows.Forms.Padding(2);
             this.NotesListBox.Name = "NotesListBox";
-            this.NotesListBox.Size = new System.Drawing.Size(254, 327);
+            this.NotesListBox.Size = new System.Drawing.Size(263, 429);
             this.NotesListBox.TabIndex = 0;
             this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged);
             // 
@@ -258,7 +258,7 @@ namespace NoteAppUI
             // 
             this.TitleLabel.AutoSize = true;
             this.TitleLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TitleLabel.Location = new System.Drawing.Point(6, 11);
+            this.TitleLabel.Location = new System.Drawing.Point(1, 11);
             this.TitleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TitleLabel.Name = "TitleLabel";
             this.TitleLabel.Size = new System.Drawing.Size(71, 31);
@@ -271,7 +271,7 @@ namespace NoteAppUI
             this.ModifiedDateTimePicker.Enabled = false;
             this.ModifiedDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.ModifiedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.ModifiedDateTimePicker.Location = new System.Drawing.Point(271, 81);
+            this.ModifiedDateTimePicker.Location = new System.Drawing.Point(266, 81);
             this.ModifiedDateTimePicker.Name = "ModifiedDateTimePicker";
             this.ModifiedDateTimePicker.Size = new System.Drawing.Size(103, 23);
             this.ModifiedDateTimePicker.TabIndex = 15;
@@ -282,7 +282,7 @@ namespace NoteAppUI
             this.CreatedDateTimePicker.Enabled = false;
             this.CreatedDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.CreatedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.CreatedDateTimePicker.Location = new System.Drawing.Point(75, 81);
+            this.CreatedDateTimePicker.Location = new System.Drawing.Point(70, 81);
             this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
             this.CreatedDateTimePicker.Size = new System.Drawing.Size(103, 23);
             this.CreatedDateTimePicker.TabIndex = 14;
@@ -291,7 +291,7 @@ namespace NoteAppUI
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(201, 83);
+            this.label5.Location = new System.Drawing.Point(196, 83);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 17);
@@ -302,7 +302,7 @@ namespace NoteAppUI
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(8, 83);
+            this.label4.Location = new System.Drawing.Point(3, 83);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(62, 17);
@@ -313,7 +313,7 @@ namespace NoteAppUI
             // 
             this.CategoryLabel.AutoSize = true;
             this.CategoryLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.CategoryLabel.Location = new System.Drawing.Point(75, 51);
+            this.CategoryLabel.Location = new System.Drawing.Point(70, 51);
             this.CategoryLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.CategoryLabel.Name = "CategoryLabel";
             this.CategoryLabel.Size = new System.Drawing.Size(97, 17);
@@ -324,7 +324,7 @@ namespace NoteAppUI
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(8, 51);
+            this.label2.Location = new System.Drawing.Point(3, 51);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 17);
@@ -337,13 +337,13 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.notesTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.notesTextBox.Location = new System.Drawing.Point(11, 115);
+            this.notesTextBox.Location = new System.Drawing.Point(2, 115);
             this.notesTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.notesTextBox.Multiline = true;
             this.notesTextBox.Name = "notesTextBox";
             this.notesTextBox.ReadOnly = true;
             this.notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.notesTextBox.Size = new System.Drawing.Size(527, 381);
+            this.notesTextBox.Size = new System.Drawing.Size(536, 381);
             this.notesTextBox.TabIndex = 0;
             // 
             // MainForm
