@@ -14,15 +14,27 @@ namespace NoteAppUI
 {
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Поле, которое содержит заметки
+        /// </summary>
         public Project Project1 { get; set; }
+
+        /// <summary>
+        /// Поле, которой содержит айди заметки
+        /// </summary>
         public int IdNote { get; set; }
-        
-        
+
+        /// <summary>
+        /// Конструктор класса
+        /// </summary>        
         public MainForm()
         {
             InitializeComponent();
-            
         }
+
+        /// <summary>
+        /// Метод, который обновляет листбокс
+        /// </summary>
         private void UpdateListBox()
         {
             Project1 = ProjectManager.LoadFromFile();
@@ -32,18 +44,33 @@ namespace NoteAppUI
                 NotesListBox.Items.Add(Project1.Notes[i].Name);
             }
         }
+
+        /// <summary>
+        /// Метод, который чистит текстбоксы 
+        /// </summary>
         private void ClearInfo()
         {
             TitleLabel.Text = "";
             notesTextBox.Text = "";
             CategoryLabel.Text = "";
         }
+
+        /// <summary>
+        /// Метод при загрузке формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
             ClearInfo();
             UpdateListBox();
         }
 
+        /// <summary>
+        /// Событие, для установки значения айди заметки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             IdNote = NotesListBox.SelectedIndex;
@@ -58,6 +85,11 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Добавление заметки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
                 AddEditForm f = new AddEditForm();
@@ -71,6 +103,11 @@ namespace NoteAppUI
                 }
         }
 
+        /// <summary>
+        /// Изменение заметки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (NotesListBox.SelectedIndex != -1)
@@ -100,12 +137,22 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Открытие формы About
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AboutForm f = new AboutForm();
             f.Show();
         }
 
+        /// <summary>
+        /// Удаление заметки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (NotesListBox.SelectedIndex != -1)
@@ -132,11 +179,21 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Закрытие формы
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             ProjectManager.SaveToFile(Project1);
         }
 
+        /// <summary>
+        /// Закрытие формы, через кнопку на тулстрипе
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ProjectManager.SaveToFile(Project1);

@@ -13,7 +13,14 @@ namespace NoteAppUI
 {
     public partial class AddEditForm : Form
     {
+        /// <summary>
+        /// Поле, для редактирование заметки
+        /// </summary>
         public bool EditNote { get; set; }
+
+        /// <summary>
+        /// Поле для текущей заметки
+        /// </summary>
         public Note CurrentNote { get; set; }
         public AddEditForm()
         {
@@ -28,9 +35,13 @@ namespace NoteAppUI
             
         }
 
+        /// <summary>
+        /// Нажатие кнопки "Ок"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void okButton_Click(object sender, EventArgs e)
         {
-
             if (EditNote == false)
             {
                 try
@@ -69,6 +80,11 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Метод загрузки формы. Если EditNote = true, то отображает данные редактируемой заметки.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Add_EditForm_Load(object sender, EventArgs e)
         {
             if (EditNote == true)
@@ -81,14 +97,23 @@ namespace NoteAppUI
             }
         }
 
+        /// <summary>
+        /// Кнопки "Отмена"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cancelButton_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// Метод, для изменения цвета titleTextBox, если длина текста больше 50
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void titleTextBox_TextChanged(object sender, EventArgs e)
         {
-            
             if(titleTextBox.TextLength > 50)
             {
                 titleTextBox.BackColor = Color.Red;
