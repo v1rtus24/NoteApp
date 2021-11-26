@@ -117,10 +117,12 @@ namespace NoteAppUI
             if(titleTextBox.TextLength > 50)
             {
                 titleTextBox.BackColor = Color.Red;
+                okButton.Enabled = false;
             }
             else
             {
                 titleTextBox.BackColor = Color.White;
+                okButton.Enabled = true;
             }
         }
     }
