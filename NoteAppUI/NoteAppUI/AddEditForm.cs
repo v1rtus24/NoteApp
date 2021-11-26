@@ -25,6 +25,7 @@ namespace NoteAppUI
             comboBox1.Items.Add(NoteCategory.Documents.ToString());
             comboBox1.Items.Add(NoteCategory.Finance.ToString());
             comboBox1.Items.Add(NoteCategory.Other.ToString());
+            
         }
 
         private void okButton_Click(object sender, EventArgs e)
@@ -85,6 +86,17 @@ namespace NoteAppUI
             this.Close();
         }
 
-
+        private void titleTextBox_TextChanged(object sender, EventArgs e)
+        {
+            
+            if(titleTextBox.TextLength > 50)
+            {
+                titleTextBox.BackColor = Color.Red;
+            }
+            else
+            {
+                titleTextBox.BackColor = Color.White;
+            }
+        }
     }
 }

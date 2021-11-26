@@ -130,6 +130,7 @@ namespace NoteAppUI
             this.titleTextBox.Name = "titleTextBox";
             this.titleTextBox.Size = new System.Drawing.Size(461, 23);
             this.titleTextBox.TabIndex = 20;
+            this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
             // 
             // dateTimePicker2
             // 

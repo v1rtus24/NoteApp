@@ -22,7 +22,6 @@ namespace NoteAppUI
         {
             InitializeComponent();
             
-
         }
         private void UpdateListBox()
         {
