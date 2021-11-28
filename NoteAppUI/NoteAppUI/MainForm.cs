@@ -12,17 +12,20 @@ using NoteApp;
 
 namespace NoteAppUI
 {
+    /// <summary>
+    /// Класс основной формы
+    /// </summary>
     public partial class MainForm : Form
     {
         /// <summary>
-        /// Поле, которое содержит заметки
+        /// Поле, содержащее список заметок
         /// </summary>
-        public Project Project1 { get; set; }
+        public Project Project { get; set; }
 
         /// <summary>
-        /// Поле, которой содержит айди заметки
+        /// Поле, которое содержит индекс заметки
         /// </summary>
-        public int IdNote { get; set; }
+        public int IndexCurrentNote { get; set; }
 
         /// <summary>
         /// Конструктор класса
@@ -33,26 +36,15 @@ namespace NoteAppUI
         }
 
         /// <summary>
-        /// Метод, который обновляет листбокс
+        /// Метод, который обновляет список заметок в листбоксе
         /// </summary>
         private void UpdateListBox()
         {
-            Project1 = ProjectManager.LoadFromFile();
             NotesListBox.Items.Clear();
-            for (int i = 0; i < Project1.Notes.Count; i++)
+            for (int i = 0; i < Project.Notes.Count; i++)
             {
-                NotesListBox.Items.Add(Project1.Notes[i].Name);
+                NotesListBox.Items.Add(Project.Notes[i].Name);
             }
-        }
-
-        /// <summary>
-        /// Метод, который чистит текстбоксы 
-        /// </summary>
-        private void ClearInfo()
-        {
-            TitleLabel.Text = "";
-            notesTextBox.Text = "";
-            CategoryLabel.Text = "";
         }
 
         /// <summary>
@@ -62,73 +54,79 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            ClearInfo();
+            Project = ProjectManager.LoadFromFile();
             UpdateListBox();
         }
 
         /// <summary>
-        /// Событие, для установки значения айди заметки
+        /// Метод, для отображения информации заметки
+        /// </summary>
+        private void ShowNoteInfo()
+        {
+            TitleLabel.Text = Project.Notes[IndexCurrentNote].Name;
+            notesTextBox.Text = Project.Notes[IndexCurrentNote].Text;
+            CreatedDateTimePicker.Value = Project.Notes[IndexCurrentNote].CreatedTime;
+            ModifiedDateTimePicker.Value = Project.Notes[IndexCurrentNote].ModifiedTime;
+            CategoryLabel.Text = Project.Notes[IndexCurrentNote].Category.ToString();
+        }
+
+        /// <summary>
+        /// Событие, для установки значения индекса заметки
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IdNote = NotesListBox.SelectedIndex;
-            if (IdNote != -1)
+            IndexCurrentNote = NotesListBox.SelectedIndex;
+            if (IndexCurrentNote == -1)
             {
-                TitleLabel.Text = Project1.Notes[IdNote].Name;
-                notesTextBox.Text = Project1.Notes[IdNote].Text;
-                CreatedDateTimePicker.Value = Project1.Notes[IdNote].CreatedTime;
-                ModifiedDateTimePicker.Value = Project1.Notes[IdNote].ModifiedTime;
-                CategoryLabel.Text = Project1.Notes[IdNote].Category.ToString();
-
+                return;
             }
+            ShowNoteInfo();
         }
 
         /// <summary>
-        /// Добавление заметки
+        /// Метод, для добавления заметки
+        /// </summary>
+        private void AddNote()
+        {
+            NoteForm form = new NoteForm();
+            if (form.ShowDialog() == DialogResult.OK)
+            {
+                Project.Notes.Add(form.CurrentNote);
+                ProjectManager.SaveToFile(Project);
+                UpdateListBox();
+                NotesListBox.SelectedIndex = NotesListBox.Items.Count - 1;
+            }
+        }
+        /// <summary>
+        /// Кнопка добавить в верхней панели
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void addNoteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-                AddEditForm f = new AddEditForm();
-                f.EditNote = false;
-                if (f.ShowDialog() == DialogResult.OK)
-                {
-                    Project1.Notes.Add(f.CurrentNote);
-                    ProjectManager.SaveToFile(Project1);
-                    UpdateListBox();
-                    ClearInfo();
-                }
+            AddNote();
         }
 
         /// <summary>
-        /// Изменение заметки
+        /// Метод, для редактирования заметки
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void EditNote()
         {
             if (NotesListBox.SelectedIndex != -1)
             {
-                AddEditForm f = new AddEditForm();
-                f.EditNote = true;
-                f.CurrentNote = Project1.Notes[IdNote];
-                
-                if (f.ShowDialog() == DialogResult.OK)
+                NoteForm form = new NoteForm();
+                form.CurrentNote = Project.Notes[IndexCurrentNote];
+
+                if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Project1.Notes[IdNote].Name = f.CurrentNote.Name;
-                    Project1.Notes[IdNote].Text = f.CurrentNote.Text;
-                    Project1.Notes[IdNote].Category = f.CurrentNote.Category;
-                    Project1.Notes[IdNote].ModifiedTime = f.CurrentNote.ModifiedTime;
-                    ProjectManager.SaveToFile(Project1);
+                    Project.Notes.RemoveAt(IndexCurrentNote);
+                    Project.Notes.Insert(IndexCurrentNote, form.CurrentNote);
+                    ProjectManager.SaveToFile(Project);
                     UpdateListBox();
-                    TitleLabel.Text = Project1.Notes[IdNote].Name;
-                    notesTextBox.Text = Project1.Notes[IdNote].Text;
-                    CreatedDateTimePicker.Value = Project1.Notes[IdNote].CreatedTime;
-                    ModifiedDateTimePicker.Value = Project1.Notes[IdNote].ModifiedTime;
-                    CategoryLabel.Text = Project1.Notes[IdNote].Category.ToString();
+                    ShowNoteInfo();
+                    NotesListBox.SelectedIndex = IndexCurrentNote;
                 }
             }
             else
@@ -138,34 +136,42 @@ namespace NoteAppUI
         }
 
         /// <summary>
+        /// Кнопка изменить в верхней панели
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void editNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            EditNote();
+        }
+
+        /// <summary>
         /// Открытие формы About
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            AboutForm f = new AboutForm();
-            f.Show();
+            AboutForm form = new AboutForm();
+            form.Show();
         }
 
         /// <summary>
-        /// Удаление заметки
+        /// Метод для удаления заметки
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RemoveNote()
         {
             if (NotesListBox.SelectedIndex != -1)
             {
 
-                DialogResult result = MessageBox.Show("Do you want to remove this note: " + Project1.Notes[IdNote].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Do you want to remove this note: " + Project.Notes[IndexCurrentNote].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.OK)
                 {
-                    Project1.Notes.Remove(Project1.Notes[IdNote]);
-                    ClearInfo();
-                    ProjectManager.SaveToFile(Project1);
+                    Project.Notes.Remove(Project.Notes[IndexCurrentNote]);
+                    ProjectManager.SaveToFile(Project);
                     UpdateListBox();
+                    NotesListBox.SelectedIndex = 0;
                 }
 
                 if (result == DialogResult.Cancel)
@@ -178,6 +184,15 @@ namespace NoteAppUI
                 MessageBox.Show("Не выбрана заметка!");
             }
         }
+        /// <summary>
+        /// Кнопка изменить в верхней панели
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void removeNoteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RemoveNote();
+        }
 
         /// <summary>
         /// Закрытие формы
@@ -186,7 +201,7 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ProjectManager.SaveToFile(Project1);
+            ProjectManager.SaveToFile(Project);
         }
 
         /// <summary>
@@ -196,23 +211,23 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectManager.SaveToFile(Project1);
+            ProjectManager.SaveToFile(Project);
             Application.Exit();
         }
 
         private void AddButton_Click(object sender, EventArgs e)
         {
-            addNoteToolStripMenuItem_Click(sender, e);
+            AddNote();
         }
 
         private void EditButton_Click(object sender, EventArgs e)
         {
-            editNoteToolStripMenuItem_Click(sender, e);
+            EditNote();
         }
 
         private void DeleteButton_Click(object sender, EventArgs e)
         {
-            removeNoteToolStripMenuItem_Click(sender, e);
+            RemoveNote();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 namespace NoteAppUI
 {
-    partial class AddEditForm
+    partial class NoteForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,15 +30,15 @@ namespace NoteAppUI
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddEditForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(NoteForm));
             this.noteTextTextBox = new System.Windows.Forms.TextBox();
             this.okButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.titleTextBox = new System.Windows.Forms.TextBox();
+            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label5 = new System.Windows.Forms.Label();
@@ -51,12 +51,12 @@ namespace NoteAppUI
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.noteTextTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.noteTextTextBox.Location = new System.Drawing.Point(11, 98);
+            this.noteTextTextBox.Location = new System.Drawing.Point(11, 95);
             this.noteTextTextBox.Margin = new System.Windows.Forms.Padding(2);
             this.noteTextTextBox.Multiline = true;
             this.noteTextTextBox.Name = "noteTextTextBox";
             this.noteTextTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.noteTextTextBox.Size = new System.Drawing.Size(532, 389);
+            this.noteTextTextBox.Size = new System.Drawing.Size(532, 392);
             this.noteTextTextBox.TabIndex = 1;
             // 
             // okButton
@@ -94,15 +94,15 @@ namespace NoteAppUI
             this.label2.TabIndex = 16;
             this.label2.Text = "Category:";
             // 
-            // comboBox1
+            // CategoryComboBox
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(85, 38);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(154, 24);
-            this.comboBox1.TabIndex = 17;
+            this.CategoryComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(85, 38);
+            this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(2);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(154, 24);
+            this.CategoryComboBox.TabIndex = 17;
             // 
             // label1
             // 
@@ -121,16 +121,16 @@ namespace NoteAppUI
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
-            // titleTextBox
+            // nameTextBox
             // 
-            this.titleTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.nameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.titleTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.titleTextBox.Location = new System.Drawing.Point(85, 9);
-            this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(461, 23);
-            this.titleTextBox.TabIndex = 20;
-            this.titleTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
+            this.nameTextBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.nameTextBox.Location = new System.Drawing.Point(85, 9);
+            this.nameTextBox.Name = "nameTextBox";
+            this.nameTextBox.Size = new System.Drawing.Size(461, 23);
+            this.nameTextBox.TabIndex = 20;
+            this.nameTextBox.TextChanged += new System.EventHandler(this.titleTextBox_TextChanged);
             // 
             // dateTimePicker2
             // 
@@ -138,7 +138,7 @@ namespace NoteAppUI
             this.dateTimePicker2.Enabled = false;
             this.dateTimePicker2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(274, 70);
+            this.dateTimePicker2.Location = new System.Drawing.Point(274, 67);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(103, 23);
             this.dateTimePicker2.TabIndex = 24;
@@ -176,7 +176,7 @@ namespace NoteAppUI
             this.label4.TabIndex = 21;
             this.label4.Text = "Created:";
             // 
-            // AddEditForm
+            // NoteForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -185,15 +185,15 @@ namespace NoteAppUI
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.titleTextBox);
+            this.Controls.Add(this.nameTextBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.CategoryComboBox);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.noteTextTextBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "AddEditForm";
+            this.Name = "NoteForm";
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Add/Edit Note";
@@ -209,10 +209,10 @@ namespace NoteAppUI
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
-        private System.Windows.Forms.TextBox titleTextBox;
+        private System.Windows.Forms.TextBox nameTextBox;
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Label label5;
