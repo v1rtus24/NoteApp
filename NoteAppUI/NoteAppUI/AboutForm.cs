@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace NoteAppUI
 {
+    /// <summary>
+    /// Класс формы "About"
+    /// </summary>
     public partial class AboutForm : Form
     {
         public AboutForm()

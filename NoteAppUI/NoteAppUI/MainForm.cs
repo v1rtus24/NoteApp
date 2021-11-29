@@ -33,6 +33,7 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
+            Project = ProjectManager.LoadFromFile();
         }
 
         /// <summary>
@@ -54,7 +55,6 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void MainForm_Load(object sender, EventArgs e)
         {
-            Project = ProjectManager.LoadFromFile();
             UpdateListBox();
         }
 

@@ -11,12 +11,19 @@ using NoteApp;
 
 namespace NoteAppUI
 {
+    /// <summary>
+    /// Класс формы, для добавления/изменения заметки
+    /// </summary>
     public partial class NoteForm : Form
         {    
         /// <summary>
         /// Поле  текущей заметки
         /// </summary>
         public Note CurrentNote { get; set; }
+
+        /// <summary>
+        /// Констуктор формы
+        /// </summary>
         public NoteForm()
         {
             InitializeComponent();
@@ -50,17 +57,20 @@ namespace NoteAppUI
             }
         }
         
-        private void UpdateForm()
+        /// <summary>
+        /// Метод, для заполнения элементов информацией о текущей заметке
+        /// </summary>
+        private void ShowNoteInfo()
         {
             nameTextBox.Text = CurrentNote.Name;
             noteTextTextBox.Text = CurrentNote.Text;
             CategoryComboBox.Text = CurrentNote.Category.ToString();
-            dateTimePicker1.Value = CurrentNote.CreatedTime;
-            dateTimePicker2.Value = CurrentNote.ModifiedTime;
+            CreatedDateTimePicker.Value = CurrentNote.CreatedTime;
+            ModifiedDateTimePicker.Value = CurrentNote.ModifiedTime;
         }
 
         /// <summary>
-        /// Метод загрузки формы. Если EditNote = true, то отображает данные редактируемой заметки.
+        /// Метод загрузки формы.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -68,12 +78,12 @@ namespace NoteAppUI
         {
             if (CurrentNote != null)
             {
-                UpdateForm();
+                ShowNoteInfo();
             }
         }
 
         /// <summary>
-        /// Кнопки "Отмена"
+        /// Кнопка "Отмена"
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
