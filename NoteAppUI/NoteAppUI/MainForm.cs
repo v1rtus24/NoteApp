@@ -34,6 +34,7 @@ namespace NoteAppUI
         {
             InitializeComponent();
             Project = ProjectManager.LoadFromFile();
+            UpdateListBox();
         }
 
         /// <summary>
@@ -46,16 +47,6 @@ namespace NoteAppUI
             {
                 NotesListBox.Items.Add(Project.Notes[i].Name);
             }
-        }
-
-        /// <summary>
-        /// Метод при загрузке формы
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            UpdateListBox();
         }
 
         /// <summary>
