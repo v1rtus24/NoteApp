@@ -113,8 +113,10 @@ namespace NoteAppUI
 
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Project.Notes.RemoveAt(CurrentNoteIndex);
-                    Project.Notes.Insert(CurrentNoteIndex, form.CurrentNote);
+                    Project.Notes[CurrentNoteIndex].Name = form.CurrentNote.Name;
+                    Project.Notes[CurrentNoteIndex].Text = form.CurrentNote.Text;
+                    Project.Notes[CurrentNoteIndex].Category = form.CurrentNote.Category;
+                    Project.Notes[CurrentNoteIndex].ModifiedTime = form.CurrentNote.ModifiedTime;
                     ProjectManager.SaveToFile(Project);
                     UpdateListBox();
                     ShowNoteInfo();
