@@ -25,7 +25,7 @@ namespace NoteAppUI
         /// <summary>
         /// Поле, которое содержит индекс заметки
         /// </summary>
-        public int IndexCurrentNote { get; set; }
+        public int CurrentNoteIndex { get; set; }
 
         /// <summary>
         /// Конструктор класса
@@ -63,11 +63,12 @@ namespace NoteAppUI
         /// </summary>
         private void ShowNoteInfo()
         {
-            TitleLabel.Text = Project.Notes[IndexCurrentNote].Name;
-            notesTextBox.Text = Project.Notes[IndexCurrentNote].Text;
-            CreatedDateTimePicker.Value = Project.Notes[IndexCurrentNote].CreatedTime;
-            ModifiedDateTimePicker.Value = Project.Notes[IndexCurrentNote].ModifiedTime;
-            CategoryLabel.Text = Project.Notes[IndexCurrentNote].Category.ToString();
+            var note = Project.Notes[CurrentNoteIndex];
+            TitleLabel.Text = note.Name;
+            notesTextBox.Text = note.Text;
+            CreatedDateTimePicker.Value = note.CreatedTime;
+            ModifiedDateTimePicker.Value = note.ModifiedTime;
+            CategoryLabel.Text = note.Category.ToString();
         }
 
         /// <summary>
@@ -77,8 +78,8 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            IndexCurrentNote = NotesListBox.SelectedIndex;
-            if (IndexCurrentNote == -1)
+            CurrentNoteIndex = NotesListBox.SelectedIndex;
+            if (CurrentNoteIndex == -1)
             {
                 return;
             }
@@ -117,16 +118,16 @@ namespace NoteAppUI
             if (NotesListBox.SelectedIndex != -1)
             {
                 NoteForm form = new NoteForm();
-                form.CurrentNote = Project.Notes[IndexCurrentNote];
+                form.CurrentNote = Project.Notes[CurrentNoteIndex];
 
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    Project.Notes.RemoveAt(IndexCurrentNote);
-                    Project.Notes.Insert(IndexCurrentNote, form.CurrentNote);
+                    Project.Notes.RemoveAt(CurrentNoteIndex);
+                    Project.Notes.Insert(CurrentNoteIndex, form.CurrentNote);
                     ProjectManager.SaveToFile(Project);
                     UpdateListBox();
                     ShowNoteInfo();
-                    NotesListBox.SelectedIndex = IndexCurrentNote;
+                    NotesListBox.SelectedIndex = CurrentNoteIndex;
                 }
             }
             else
@@ -164,11 +165,11 @@ namespace NoteAppUI
             if (NotesListBox.SelectedIndex != -1)
             {
 
-                DialogResult result = MessageBox.Show("Do you want to remove this note: " + Project.Notes[IndexCurrentNote].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Do you want to remove this note: " + Project.Notes[CurrentNoteIndex].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
 
                 if (result == DialogResult.OK)
                 {
-                    Project.Notes.Remove(Project.Notes[IndexCurrentNote]);
+                    Project.Notes.Remove(Project.Notes[CurrentNoteIndex]);
                     ProjectManager.SaveToFile(Project);
                     UpdateListBox();
                     NotesListBox.SelectedIndex = 0;

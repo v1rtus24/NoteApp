@@ -15,11 +15,11 @@ namespace NoteAppUI
     /// Класс формы, для добавления/изменения заметки
     /// </summary>
     public partial class NoteForm : Form
-        {    
+        {
         /// <summary>
         /// Поле  текущей заметки
         /// </summary>
-        public Note CurrentNote { get; set; }
+        public Note CurrentNote { get; set; } 
 
         /// <summary>
         /// Констуктор формы
@@ -42,8 +42,8 @@ namespace NoteAppUI
             {
                 if (CategoryComboBox.SelectedIndex != -1)
                 {
-                    var curentCategory = (NoteCategory)CategoryComboBox.SelectedIndex;
-                    CurrentNote = new Note(nameTextBox.Text, noteTextTextBox.Text, curentCategory);
+                    var currentCategory = (NoteCategory)CategoryComboBox.SelectedIndex;
+                    CurrentNote = new Note(nameTextBox.Text, noteTextTextBox.Text, currentCategory);
                     DialogResult = DialogResult.OK;
                 }
                 else
@@ -99,15 +99,18 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void titleTextBox_TextChanged(object sender, EventArgs e)
         {
-            if(nameTextBox.TextLength > 50)
+            try
+            {
+                var note = new Note();
+                note.Name = nameTextBox.Text;
+                nameTextBox.BackColor = Color.White;
+                okButton.Enabled = true;
+            }
+
+            catch (ArgumentException ex)
             {
                 nameTextBox.BackColor = Color.LightSalmon;
                 okButton.Enabled = false;
-            }
-            else
-            {
-                nameTextBox.BackColor = Color.White;
-                okButton.Enabled = true;
             }
         }
     }
