@@ -18,7 +18,6 @@ namespace NoteApp
         /// </summary>
         private string _name;
         
-
         /// <summary>
         /// Свойство для поля "Название заметки"
         /// </summary>
@@ -29,7 +28,7 @@ namespace NoteApp
             }  
             set
             {
-                if (value.Length == 0 )
+                if (value.Length == 0)
                 {
                     _name = "Без названия";
                     return;
@@ -79,12 +78,14 @@ namespace NoteApp
             CreatedTime = DateTime.Now;
             
         }
+        /// <summary>
+        /// Пустой конструктор
+        /// </summary>
         public Note() { }
 
         /// <summary>
         /// Метод, который возвращает копию объекта
         /// </summary>
-       
         /// <returns></returns>
         public object Clone()
         {
