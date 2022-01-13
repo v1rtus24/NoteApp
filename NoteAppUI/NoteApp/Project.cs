@@ -16,5 +16,31 @@ namespace NoteApp
         /// </summary>
         public List<Note> Notes { get; set; } = new List<Note>();
 
+        /// <summary>
+        /// Хранит текущую заметку
+        /// </summary>
+        public Note CurrentNote { get; set; }
+
+        /// <summary>
+        /// Организовать список по дате создания заметок
+        /// </summary>
+        /// <returns>Список отсортированных заметок</returns>
+        public List<Note> SortList()
+        {
+            return Notes.OrderByDescending(t => t.ModifiedTime).ToList();
+        }
+
+        /// <summary>
+        /// Организовать список заметок по дате создания и отфильтровать по категории
+        /// </summary>
+        /// <param name="category">Категория заметки</param>
+        /// <returns>Список отфильтрованных заметок</returns>
+        public List<Note> SortList(NoteCategory category)
+        {
+            List<Note> SortedList = new List<Note>();
+            SortedList = SortList().FindAll(t => t.Category == category);
+            return SortedList;
+        }
+
     }
 }

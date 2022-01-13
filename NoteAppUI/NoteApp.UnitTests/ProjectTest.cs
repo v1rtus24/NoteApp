@@ -7,8 +7,10 @@ using NUnit.Framework;
 
 namespace NoteApp.UnitTests
 {
+    [TestFixture]
     public class ProjectTest
     {
+
         [Test(Description = "Позитивный тест геттера Notes")]
         public void TestNotesGet_CorrectValue()
         {

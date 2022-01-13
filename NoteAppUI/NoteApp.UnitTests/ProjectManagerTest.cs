@@ -9,6 +9,7 @@ using NoteApp;
 
 namespace NoteApp.UnitTests
 {
+    [TestFixture]
     public class ProjectManagerTest
     {
         private static readonly string FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)

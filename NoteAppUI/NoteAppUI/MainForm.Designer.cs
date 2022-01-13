@@ -44,7 +44,7 @@ namespace NoteAppUI
             this.EditButton = new System.Windows.Forms.Button();
             this.AddButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.CategoryComboBox = new System.Windows.Forms.ComboBox();
             this.NotesListBox = new System.Windows.Forms.ListBox();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.ModifiedDateTimePicker = new System.Windows.Forms.DateTimePicker();
@@ -150,7 +150,7 @@ namespace NoteAppUI
             this.splitContainer1.Panel1.Controls.Add(this.EditButton);
             this.splitContainer1.Panel1.Controls.Add(this.AddButton);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.comboBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.CategoryComboBox);
             this.splitContainer1.Panel1.Controls.Add(this.NotesListBox);
             // 
             // splitContainer1.Panel2
@@ -165,7 +165,7 @@ namespace NoteAppUI
             this.splitContainer1.Panel2.Controls.Add(this.label2);
             this.splitContainer1.Panel2.Controls.Add(this.notesTextBox);
             this.splitContainer1.Size = new System.Drawing.Size(1083, 623);
-            this.splitContainer1.SplitterDistance = 354;
+            this.splitContainer1.SplitterDistance = 353;
             this.splitContainer1.TabIndex = 5;
             // 
             // DeleteButton
@@ -225,18 +225,19 @@ namespace NoteAppUI
             this.label1.TabIndex = 2;
             this.label1.Text = "Show Category:";
             // 
-            // comboBox1
+            // CategoryComboBox
             // 
-            this.comboBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.CategoryComboBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.comboBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(147, 6);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(204, 28);
-            this.comboBox1.TabIndex = 1;
-            this.comboBox1.Text = "All";
+            this.CategoryComboBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.CategoryComboBox.FormattingEnabled = true;
+            this.CategoryComboBox.Location = new System.Drawing.Point(147, 6);
+            this.CategoryComboBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.CategoryComboBox.Name = "CategoryComboBox";
+            this.CategoryComboBox.Size = new System.Drawing.Size(203, 28);
+            this.CategoryComboBox.TabIndex = 1;
+            this.CategoryComboBox.Text = "All";
+            this.CategoryComboBox.SelectedIndexChanged += new System.EventHandler(this.CategoryComboBox_SelectedIndexChanged);
             // 
             // NotesListBox
             // 
@@ -250,7 +251,7 @@ namespace NoteAppUI
             this.NotesListBox.Location = new System.Drawing.Point(3, 42);
             this.NotesListBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.NotesListBox.Name = "NotesListBox";
-            this.NotesListBox.Size = new System.Drawing.Size(348, 531);
+            this.NotesListBox.Size = new System.Drawing.Size(347, 531);
             this.NotesListBox.TabIndex = 0;
             this.NotesListBox.SelectedIndexChanged += new System.EventHandler(this.NotesListBox_SelectedIndexChanged);
             // 
@@ -340,7 +341,7 @@ namespace NoteAppUI
             this.notesTextBox.Name = "notesTextBox";
             this.notesTextBox.ReadOnly = true;
             this.notesTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.notesTextBox.Size = new System.Drawing.Size(717, 486);
+            this.notesTextBox.Size = new System.Drawing.Size(721, 487);
             this.notesTextBox.TabIndex = 0;
             // 
             // MainForm
@@ -379,7 +380,7 @@ namespace NoteAppUI
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox CategoryComboBox;
         private System.Windows.Forms.ListBox NotesListBox;
         private System.Windows.Forms.TextBox notesTextBox;
         private System.Windows.Forms.Button DeleteButton;

@@ -22,6 +22,8 @@ namespace NoteAppUI
         /// </summary>
         public Project Project { get; set; }
 
+        public Project ProjectSort { get; set; }
+
         /// <summary>
         /// Поле, которое содержит индекс заметки
         /// </summary>
@@ -34,7 +36,11 @@ namespace NoteAppUI
         {
             InitializeComponent();
             Project = ProjectManager.LoadFromFile();
+            ProjectSort = new Project();
             UpdateListBox();
+            var categories = Enum.GetValues(typeof(NoteCategory)).Cast<object>().ToArray();
+            CategoryComboBox.Items.Add("All");
+            CategoryComboBox.Items.AddRange(categories);
         }
 
         /// <summary>
@@ -42,10 +48,22 @@ namespace NoteAppUI
         /// </summary>
         private void UpdateListBox()
         {
+            Project.Notes = Project.SortList();
             NotesListBox.Items.Clear();
-            for (int i = 0; i < Project.Notes.Count; i++)
+            if (CategoryComboBox.Text == "All")
             {
-                NotesListBox.Items.Add(Project.Notes[i].Name);
+                for (int i = 0; i < Project.Notes.Count; i++)
+                {
+                    NotesListBox.Items.Add(Project.Notes[i].Name);
+                }
+            }
+            else
+            {
+                ProjectSort.Notes = Project.SortList((NoteCategory)CategoryComboBox.SelectedItem);
+                for (int i = 0; i < ProjectSort.Notes.Count; i++)
+                {
+                    NotesListBox.Items.Add(ProjectSort.Notes[i].Name);
+                }
             }
         }
 
@@ -54,12 +72,24 @@ namespace NoteAppUI
         /// </summary>
         private void ShowNoteInfo()
         {
-            var note = Project.Notes[CurrentNoteIndex];
-            TitleLabel.Text = note.Name;
-            notesTextBox.Text = note.Text;
-            CreatedDateTimePicker.Value = note.CreatedTime;
-            ModifiedDateTimePicker.Value = note.ModifiedTime;
-            CategoryLabel.Text = note.Category.ToString();
+            if (CategoryComboBox.Text == "All")
+            {
+                var note = Project.Notes[CurrentNoteIndex];
+                TitleLabel.Text = note.Name;
+                notesTextBox.Text = note.Text;
+                CreatedDateTimePicker.Value = note.CreatedTime;
+                ModifiedDateTimePicker.Value = note.ModifiedTime;
+                CategoryLabel.Text = note.Category.ToString();
+            }
+            else
+            {
+                var note = ProjectSort.Notes[CurrentNoteIndex];
+                TitleLabel.Text = note.Name;
+                notesTextBox.Text = note.Text;
+                CreatedDateTimePicker.Value = note.CreatedTime;
+                ModifiedDateTimePicker.Value = note.ModifiedTime;
+                CategoryLabel.Text = note.Category.ToString();
+            }
         }
 
         /// <summary>
@@ -69,12 +99,20 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void NotesListBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            CurrentNoteIndex = NotesListBox.SelectedIndex;
-            if (CurrentNoteIndex == -1)
+            try
+            {
+                CurrentNoteIndex = NotesListBox.SelectedIndex;
+                Project.CurrentNote = Project.Notes[CurrentNoteIndex];
+                if (CurrentNoteIndex == -1)
+                {
+                    return;
+                }
+                ShowNoteInfo();
+            }
+            catch
             {
                 return;
             }
-            ShowNoteInfo();
         }
 
         /// <summary>
@@ -86,9 +124,8 @@ namespace NoteAppUI
             if (form.ShowDialog() == DialogResult.OK)
             {
                 Project.Notes.Add(form.CurrentNote);
-                ProjectManager.SaveToFile(Project);
                 UpdateListBox();
-                NotesListBox.SelectedIndex = NotesListBox.Items.Count - 1;
+                NotesListBox.SelectedIndex = 0;
             }
         }
         /// <summary>
@@ -117,10 +154,9 @@ namespace NoteAppUI
                     Project.Notes[CurrentNoteIndex].Text = form.CurrentNote.Text;
                     Project.Notes[CurrentNoteIndex].Category = form.CurrentNote.Category;
                     Project.Notes[CurrentNoteIndex].ModifiedTime = form.CurrentNote.ModifiedTime;
-                    ProjectManager.SaveToFile(Project);
                     UpdateListBox();
                     ShowNoteInfo();
-                    NotesListBox.SelectedIndex = CurrentNoteIndex;
+                    NotesListBox.SelectedIndex = 0;
                 }
             }
             else
@@ -163,7 +199,6 @@ namespace NoteAppUI
                 if (result == DialogResult.OK)
                 {
                     Project.Notes.Remove(Project.Notes[CurrentNoteIndex]);
-                    ProjectManager.SaveToFile(Project);
                     UpdateListBox();
                     NotesListBox.SelectedIndex = 0;
                 }
@@ -178,6 +213,7 @@ namespace NoteAppUI
                 MessageBox.Show("Не выбрана заметка!");
             }
         }
+
         /// <summary>
         /// Кнопка изменить в верхней панели
         /// </summary>
@@ -222,6 +258,29 @@ namespace NoteAppUI
         private void DeleteButton_Click(object sender, EventArgs e)
         {
             RemoveNote();
+        }
+
+        /// <summary>
+        /// Выбор категории(сортировка по категории)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CategoryComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CategoryComboBox.Text != "All")
+            {
+                AddButton.Enabled = false;
+                EditButton.Enabled = false;
+                DeleteButton.Enabled = false;
+                UpdateListBox();
+            }
+            else
+            {
+                AddButton.Enabled = true;
+                EditButton.Enabled = true;
+                DeleteButton.Enabled = true;
+                UpdateListBox();
+            }
         }
     }
 }

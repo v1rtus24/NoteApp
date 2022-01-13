@@ -17,15 +17,16 @@ namespace NoteApp
         /// "Название заметки"
         /// </summary>
         private string _name;
-        
+
         /// <summary>
         /// Свойство для поля "Название заметки"
         /// </summary>
-        public string Name { 
-            get 
-            { 
-                return _name; 
-            }  
+        public string Name
+        {
+            get
+            {
+                return _name;
+            }
             set
             {
                 if (value.Length == 0)
@@ -61,8 +62,7 @@ namespace NoteApp
         /// Свойство для поля "Время последнего редактирования"
         /// </summary>
         public DateTime ModifiedTime { get; set; }
-        
-        
+
         /// <summary>
         /// Конструктор, для установки значений 
         /// </summary>
