@@ -35,7 +35,7 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
-            Project = ProjectManager.LoadFromFile();
+            Project = ProjectManager.LoadFromFile(ProjectManager.FilePath);
             ProjectSort = new Project();
             UpdateListBox();
             var categories = Enum.GetValues(typeof(NoteCategory)).Cast<object>().ToArray();
@@ -231,7 +231,7 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            ProjectManager.SaveToFile(Project);
+            ProjectManager.SaveToFile(Project,ProjectManager.FilePath);
         }
 
         /// <summary>
@@ -241,7 +241,7 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ProjectManager.SaveToFile(Project);
+            ProjectManager.SaveToFile(Project,ProjectManager.FilePath);
             Application.Exit();
         }
 

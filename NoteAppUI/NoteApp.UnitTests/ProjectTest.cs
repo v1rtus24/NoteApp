@@ -7,20 +7,25 @@ using NUnit.Framework;
 
 namespace NoteApp.UnitTests
 {
+    
     [TestFixture]
     public class ProjectTest
     {
-
+        private Project _project;
+        
         [Test(Description = "Позитивный тест геттера Notes")]
         public void TestNotesGet_CorrectValue()
         {
+            // Setup
             var expected = new List<Note>();
             expected.Add(new Note("Name1", "Text1", NoteCategory.Other));
 
-            var project = new Project();
-            project.Notes.Add(new Note("Name1", "Text1", NoteCategory.Other));
-            var actual = project.Notes;
+            // Act
+            _project = new Project();
+            _project.Notes.Add(new Note("Name1", "Text1", NoteCategory.Other));
+            var actual = _project.Notes;
 
+            // Assert
             Assert.AreEqual(expected[0].Name, actual[0].Name);
             Assert.AreEqual(expected[0].Text, actual[0].Text);
             Assert.AreEqual(expected[0].Category, actual[0].Category);
@@ -29,12 +34,19 @@ namespace NoteApp.UnitTests
         [Test(Description = "Позитивный тест сеттера Notes")]
         public void TestNotesSet_CorrectValue()
         {
-            var exceptedProject = new Project();
-            exceptedProject.Notes.Add(new Note("Name1", "Text1", NoteCategory.Other));
-            var actualProject = new Project();
+            // Setup
+            var expected = new List<Note>();
+            expected.Add(new Note("Name1", "Text1", NoteCategory.Other));
 
-            Assert.DoesNotThrow(() => { actualProject = exceptedProject; },
-               "Не должно возникать исключения");
+            // Act
+            _project = new Project();
+            _project.Notes = expected;
+            var actual = _project.Notes;
+
+            // Assert
+            Assert.AreEqual(expected[0].Name, actual[0].Name);
+            Assert.AreEqual(expected[0].Text, actual[0].Text);
+            Assert.AreEqual(expected[0].Category, actual[0].Category);
         }
     }
 }
