@@ -29,7 +29,7 @@ namespace NoteApp.UnitTests
             @"\TestData\CorrectData.notes";
 
         /// <summary>
-        /// Путь к папке, в которой лежит сохраняемый тестовый файл.
+        /// Путь к папке, в которую сохраняется тестовый файл.
         /// </summary>
         private static readonly string SavingDirectoryPath = FolderPath +
             @"\Output";
