@@ -200,7 +200,18 @@ namespace NoteAppUI
                 {
                     Project.Notes.Remove(Project.Notes[CurrentNoteIndex]);
                     UpdateListBox();
-                    NotesListBox.SelectedIndex = 0;
+                    if (NotesListBox.Items.Count > 0)
+                    {
+                        NotesListBox.SelectedIndex = 0;
+                    }
+                    else
+                    {
+                        TitleLabel.Text = "";
+                        notesTextBox.Text = "";
+                        CreatedDateTimePicker.Value = DateTime.Now;
+                        ModifiedDateTimePicker.Value = DateTime.Now;
+                        CategoryLabel.Text = "";
+                    }
                 }
 
                 if (result == DialogResult.Cancel)
