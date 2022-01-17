@@ -19,7 +19,7 @@ namespace NoteApp.UnitTests
             _note = new Note();
         }
 
-        [Test(Description = "Позитивный тест геттера Name")]
+        [Test(Description = "Тест геттера Name")]
         public void TestNameGet_CorrectValue()
         {
             // Setup
@@ -49,7 +49,6 @@ namespace NoteApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера Name")]
-        
         public void TestNameSet_CorrectValue()
         {
             //Setup

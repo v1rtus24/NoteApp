@@ -13,7 +13,7 @@ namespace NoteApp.UnitTests
     {
         private Project _project;
         
-        [Test(Description = "Позитивный тест геттера Notes")]
+        [Test(Description = "Тест геттера Notes")]
         public void TestNotesGet_CorrectValue()
         {
             // Setup

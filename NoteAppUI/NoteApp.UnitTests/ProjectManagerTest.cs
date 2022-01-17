@@ -52,8 +52,35 @@ namespace NoteApp.UnitTests
             ProjectManager.SaveToFile(_project, _correctDataFileName);
         }
 
-        [Test(Description = "Позитивный тест геттера DefaultPath")]
+        [Test(Description = "Тест геттера FolderPath")]
         public void TestFolderPathGet_CorrectValue()
+        {
+            // Setup
+            var expected = FolderPath;
+
+            // Act
+            var actual = ProjectManager.FolderPath;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test(Description = "Позитивный тест сеттера FolderPath")]
+        public void TestFolderPathSet_CorrectValue()
+        {
+            // Setup
+            var expected = ProjectManager.FolderPath;
+
+            // Act
+            ProjectManager.FolderPath = expected;
+            var actual = ProjectManager.FolderPath;
+
+            // Assert
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test(Description = "Тест геттера FilePath")]
+        public void TestFilePathGet_CorrectValue()
         {
             // Setup
             var expected = FilePath;
@@ -65,8 +92,8 @@ namespace NoteApp.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test(Description = "Позитивный тест сеттера DefaultPath")]
-        public void TestFolderPathSet_CorrectValue()
+        [Test(Description = "Позитивный тест сеттера FilePath")]
+        public void TestFilePathSet_CorrectValue()
         {
             // Setup
             var expected = ProjectManager.FilePath;
@@ -77,7 +104,7 @@ namespace NoteApp.UnitTests
 
             // Assert
             Assert.AreEqual(expected, actual);
-      }
+        }
 
         [Test(Description = "Сохранение проекта в файл")]
         public void TestSaveToFile()
@@ -87,9 +114,27 @@ namespace NoteApp.UnitTests
             ProjectManager.SaveToFile(savingProject, _correctDataFileName);
             var expected = File.ReadAllText(_correctDataFileName);
 
+            // Act
+            ProjectManager.SaveToFile(savingProject, _savingDataFilename);
+            var actual = File.ReadAllText(_savingDataFilename);
+
+            // Assert
+            Assert.IsTrue(Directory.Exists(SavingDirectoryPath), "Папка для хранения тестового файла не создана");
+            Assert.IsTrue(File.Exists(_savingDataFilename), "Файл для сохранения тестового файла не создан");
+            Assert.AreEqual(expected, actual);
+        }
+
+        [Test(Description = "Сохранение проекта в несуществующий файл")]
+        public void TestSaveToFileWithoutDirectory()
+        {
+            // Setup
+            var savingProject = _project;
+            ProjectManager.SaveToFile(savingProject, _correctDataFileName);
+            var expected = File.ReadAllText(_correctDataFileName);
+
             if (Directory.Exists(SavingDirectoryPath))
             {
-                Directory.Delete(SavingDirectoryPath,true);
+                Directory.Delete(SavingDirectoryPath, true);
             }
 
             // Act
@@ -102,7 +147,7 @@ namespace NoteApp.UnitTests
             Assert.AreEqual(expected, actual);
         }
 
-        [Test(Description = "Загрузка правильно сохраненного файла проекта")]
+        [Test(Description = "Загрузка  сохраненного файла проекта")]
         public void TestLoadFromFile()
         {
             // Setup
