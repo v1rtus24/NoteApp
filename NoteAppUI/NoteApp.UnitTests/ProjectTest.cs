@@ -10,20 +10,19 @@ namespace NoteApp.UnitTests
     
     [TestFixture]
     public class ProjectTest
-    {
-        private Project _project;
-        
+    {      
         [Test(Description = "Тест геттера Notes")]
-        public void TestNotesGet_CorrectValue()
+        public void Test_Notes_CorrectValue_ReturnsSameValue()
         {
             // Setup
+            var project = new Project();
             var expected = new List<Note>();
             expected.Add(new Note("Name1", "Text1", NoteCategory.Other));
 
             // Act
-            _project = new Project();
-            _project.Notes.Add(new Note("Name1", "Text1", NoteCategory.Other));
-            var actual = _project.Notes;
+            project = new Project();
+            project.Notes.Add(new Note("Name1", "Text1", NoteCategory.Other));
+            var actual = project.Notes;
 
             // Assert
             Assert.AreEqual(expected[0].Name, actual[0].Name);
@@ -32,16 +31,17 @@ namespace NoteApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера Notes")]
-        public void TestNotesSet_CorrectValue()
+        public void Test_Notes_CorrectValue_SetsCorrectValue()
         {
             // Setup
+            var project = new Project();
             var expected = new List<Note>();
             expected.Add(new Note("Name1", "Text1", NoteCategory.Other));
 
             // Act
-            _project = new Project();
-            _project.Notes = expected;
-            var actual = _project.Notes;
+            project = new Project();
+            project.Notes = expected;
+            var actual = project.Notes;
 
             // Assert
             Assert.AreEqual(expected[0].Name, actual[0].Name);

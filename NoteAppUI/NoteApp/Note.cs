@@ -92,5 +92,21 @@ namespace NoteApp
             return this.MemberwiseClone();
         }
 
+        /// <summary>
+        /// Сравнивает значения двух заметок
+        /// </summary>
+        /// <param name="obj">Заметка, с которой идет сравнение</param>
+        /// <returns>true, если все поля одной заметки совпадают с другой, иначе - false</returns>
+        public override bool Equals(object obj)
+        {
+            if (!(obj is Note other))
+            {
+                return false;
+            }
+
+            return Name == other.Name && Text == other.Text && Category == other.Category &&
+                CreatedTime == other.CreatedTime && ModifiedTime == other.ModifiedTime;
+        }
+
     }
 }
