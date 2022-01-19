@@ -16,10 +16,8 @@ namespace NoteApp
         /// <summary>
         /// Возвращает и задает путь по умолчанию к файлу>. 
         /// </summary>
-        public static string FolderPath { get; set; } = Environment.GetFolderPath(
-            Environment.SpecialFolder.ApplicationData) + @"\NoteApp";
-
-        public static string FilePath { get; set; } = FolderPath + @"\NoteApp.notes";
+        public static string FilePath { get; set; } = Environment.GetFolderPath(
+            Environment.SpecialFolder.ApplicationData) + @"\NoteApp\NoteApp.notes";
 
         /// <summary>
         /// Метод сохранения данных в файл
