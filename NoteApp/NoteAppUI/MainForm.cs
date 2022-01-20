@@ -355,7 +355,6 @@ namespace NoteAppUI
             if (NotesListBox.Items.Count == 0)
             {
                 ClearInfo();
-                MessageBox.Show("Нет заметок с данной категорией");
             }
             else
                 return;

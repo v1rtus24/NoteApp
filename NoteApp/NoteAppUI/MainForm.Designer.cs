@@ -272,7 +272,7 @@ namespace NoteAppUI
             this.ModifiedDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.ModifiedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.ModifiedDateTimePicker.Location = new System.Drawing.Point(355, 100);
-            this.ModifiedDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ModifiedDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
             this.ModifiedDateTimePicker.Name = "ModifiedDateTimePicker";
             this.ModifiedDateTimePicker.Size = new System.Drawing.Size(136, 27);
             this.ModifiedDateTimePicker.TabIndex = 15;
@@ -284,7 +284,7 @@ namespace NoteAppUI
             this.CreatedDateTimePicker.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F);
             this.CreatedDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.CreatedDateTimePicker.Location = new System.Drawing.Point(93, 100);
-            this.CreatedDateTimePicker.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.CreatedDateTimePicker.Margin = new System.Windows.Forms.Padding(4);
             this.CreatedDateTimePicker.Name = "CreatedDateTimePicker";
             this.CreatedDateTimePicker.Size = new System.Drawing.Size(136, 27);
             this.CreatedDateTimePicker.TabIndex = 14;
