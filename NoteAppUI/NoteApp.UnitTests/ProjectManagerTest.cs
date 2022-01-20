@@ -134,6 +134,7 @@ namespace NoteApp.UnitTests
                 CreatedTime = new DateTime(2022, 01, 19),
                 ModifiedTime = new DateTime(2022, 01, 19)
             });
+            ProjectManager.SaveToFile(exceptedProject, ExceptedFileName);
             return exceptedProject;
         }
     }
