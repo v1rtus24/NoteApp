@@ -9,7 +9,7 @@ namespace NoteApp.UnitTests
 {
     
     [TestFixture]
-    public class ProjectTest
+    public class ProjectTests
     {      
         [Test(Description = "Тест геттера Notes")]
         public void Test_Notes_CorrectValue_ReturnsSameValue()

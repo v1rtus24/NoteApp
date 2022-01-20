@@ -11,7 +11,7 @@ using System.Reflection;
 namespace NoteApp.UnitTests
 {
     [TestFixture]
-    public class ProjectManagerTest
+    public class ProjectManagerTests
     {
         /// <summary>
         /// Расположение сборки, которая содержит код, исполняемый в данный момент.
