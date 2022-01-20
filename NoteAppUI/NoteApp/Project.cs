@@ -17,9 +17,10 @@ namespace NoteApp
         public List<Note> Notes { get; set; } = new List<Note>();
 
         /// <summary>
-        /// Хранит текущую заметку
-        /// </summary>
-        public Note CurrentNote { get; set; }
+		/// Свойство текущей заметки.
+		/// </summary>
+		public int CurrentNote { get; set; } = -1;
+
 
         /// <summary>
         /// Организовать список по дате создания заметок
@@ -41,6 +42,5 @@ namespace NoteApp
             SortedList = SortList().FindAll(t => t.Category == category);
             return SortedList;
         }
-
     }
 }
