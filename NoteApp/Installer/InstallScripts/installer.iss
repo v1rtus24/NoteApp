@@ -29,7 +29,7 @@ DisableProgramGroupPage=yes
 ;PrivilegesRequired=lowest
 OutputDir="installers"
 OutputBaseFilename=NoteAppSetup
-SetupIconFile="..\NoteAppUI\{#AppIconName}"
+SetupIconFile="..\..\NoteAppUI\{#AppIconName}"
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -43,7 +43,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 [Files]
 Source: "Release\*.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "Release\*.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "..\NoteAppUI\{#AppIconName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "..\..\NoteAppUI\{#AppIconName}"; DestDir: "{app}"; Flags: ignoreversion
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files ValueData: ""
 
 [Icons]
