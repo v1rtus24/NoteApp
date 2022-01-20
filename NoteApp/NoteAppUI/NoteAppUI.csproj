@@ -129,14 +129,14 @@
     <Error Condition="!Exists('..\packages\NUnit.3.13.2\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit.3.13.2\build\NUnit.props'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>md "$(SolutionDir)InstallScripts"
-md "$(SolutionDir)InstallScripts\Release"
-md "$(SolutionDir)InstallScripts\Installers"
+    <PostBuildEvent>md "$(SolutionDir)\Installer\InstallScripts"
+md "$(SolutionDir)\Installer\InstallScripts\Release"
+md "$(SolutionDir)\Installer\InstallScripts\Installers"
 xcopy "$(ProjectDir)$(OutDir)*.dll" "$(SolutionDir)\Installer\InstallScripts\Release\"
 xcopy "$(ProjectDir)$(OutDir)*.exe" "$(SolutionDir)\Installer\InstallScripts\Release\"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>rd /S /Q "$(SolutionDir)InstallScripts\Release"
-rd /S /Q "$(SolutionDir)InstallScripts\Installers"</PreBuildEvent>
+    <PreBuildEvent>rd /S /Q "$(SolutionDir)\Installer\InstallScripts\Release"
+rd /S /Q "$(SolutionDir)\Installer\InstallScripts\Installers"</PreBuildEvent>
   </PropertyGroup>
 </Project>
