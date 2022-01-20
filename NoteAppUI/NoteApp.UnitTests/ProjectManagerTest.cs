@@ -99,7 +99,7 @@ namespace NoteApp.UnitTests
         public void Test_LoadFromFile_LoadCorruptedProject_ReturnsEmptyProject()
         {
             //Setup
-            var wrongFileName = DirectoryInformation + "/12345.txt";
+            var wrongFileName = DirectoryInformation + @"\12345.txt";
 
 
             // Act
@@ -113,7 +113,7 @@ namespace NoteApp.UnitTests
         public void Test_LoadFromFile_LoadNonExistentProject_ReturnsEmptyProject()
         {
             // Setup
-            var nonExistentFileName = DirectoryInformation + "/123456789.notes";
+            var nonExistentFileName = DirectoryInformation + @"\123456789.notes";
 
             // Act
             var actualProject = ProjectManager.LoadFromFile(nonExistentFileName);
