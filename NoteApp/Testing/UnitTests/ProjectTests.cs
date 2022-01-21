@@ -16,37 +16,33 @@ namespace NoteApp.UnitTests
         {
             // Setup
             var project = new Project();
-            var expected = new List<Note>();
-            expected.Add(new Note("Name1", "Text1", NoteCategory.Other));
+            var expected = new Note("Name1", "Text1", NoteCategory.Other);
 
             // Act
-            project = new Project();
-            project.Notes.Add(new Note("Name1", "Text1", NoteCategory.Other));
+            project.Notes.Add(expected);
             var actual = project.Notes;
 
             // Assert
-            Assert.AreEqual(expected[0].Name, actual[0].Name);
-            Assert.AreEqual(expected[0].Text, actual[0].Text);
-            Assert.AreEqual(expected[0].Category, actual[0].Category);
+            Assert.AreEqual(1,actual.Count);
+            Assert.AreEqual(expected, actual[0]);
         }
 
         [Test(Description = "Позитивный тест сеттера Notes")]
-        public void Test_Notes_CorrectValue_SetsCorrectValue()
+        public void Test_Notes_ReplaceDefaultNotesList_SetsCorrectValue()
         {
             // Setup
             var project = new Project();
-            var expected = new List<Note>();
-            expected.Add(new Note("Name1", "Text1", NoteCategory.Other));
+            var expectedList = new List<Note>();
+            expectedList.Add(new Note("Name1", "Text1", NoteCategory.Other));
 
             // Act
-            project = new Project();
-            project.Notes = expected;
+            project.Notes = expectedList;
             var actual = project.Notes;
 
             // Assert
-            Assert.AreEqual(expected[0].Name, actual[0].Name);
-            Assert.AreEqual(expected[0].Text, actual[0].Text);
-            Assert.AreEqual(expected[0].Category, actual[0].Category);
+            Assert.AreEqual(expectedList.Count,actual.Count);
+            Assert.AreEqual(expectedList[0], actual[0]);
+
         }
     }
 }

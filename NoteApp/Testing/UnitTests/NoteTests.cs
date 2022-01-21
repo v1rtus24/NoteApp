@@ -43,7 +43,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера Name")]
-        public void Test_Name_CorrectValue_SetCorrectValue()
+        public void Test_Name_CorrectValue_SetsCorrectValue()
         {
             //Setup
             var note = new Note();
@@ -58,7 +58,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test(Description = "Присвоение пустой строки для Name")]
-        public void Test_Name_EmptyValue_SetCorrectValue()
+        public void Test_Name_EmptyValue_SetsDefaultValue()
         {
             // Setup
             var note = new Note();
@@ -90,7 +90,7 @@ namespace NoteApp.UnitTests
         }
 
         [Test(Description = "Позитивный тест сеттера Category")]
-        public void Test_Category_CorrectValue_SetCorrectValue()
+        public void Test_Category_CorrectValue_SetsCorrectValue()
         {
             //Setup
             var note = new Note();

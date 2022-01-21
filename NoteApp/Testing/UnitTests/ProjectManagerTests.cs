@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using NoteApp;
 using System.Reflection;
+using System.Runtime.CompilerServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace NoteApp.UnitTests
 {
@@ -29,19 +31,19 @@ namespace NoteApp.UnitTests
         private static readonly string DefaultFilePath  = Environment.GetFolderPath(
             Environment.SpecialFolder.ApplicationData) + @"\NoteApp\NoteApp.notes";
 
-        private static readonly string ExceptedFileName = DirectoryInformation + @"\exceptedProject.json";
+        private static readonly string ExpectedFileName = DirectoryInformation + @"\expectedProject.json";
 
         [Test(Description = "Сохранение проекта в файл")]
         public void Test_SaveToFile_CorrectProject_CorrectSavedFile()
         {
             // Setup
-            var exceptedProject = new Project();
-            exceptedProject = CreateExceptedProject();
-            var expectedFileContent = File.ReadAllText(ExceptedFileName);
+            var expectedProject = new Project();
+            expectedProject = CreateExpectedProject();
+            var expectedFileContent = File.ReadAllText(ExpectedFileName);
 
             // Act
             var actualFileName = DirectoryInformation + @"\actualProject.json";
-            ProjectManager.SaveToFile(exceptedProject, actualFileName);
+            ProjectManager.SaveToFile(expectedProject, actualFileName);
             var actualFileContent = File.ReadAllText(actualFileName);
 
             // Assert
@@ -54,9 +56,9 @@ namespace NoteApp.UnitTests
         public void Test_SaveToFile_WithoutDirectory_CorrectSavedFile()
         {
             // Setup
-            var exceptedProject = new Project();
-            exceptedProject = CreateExceptedProject();
-            var expectedFileContent = File.ReadAllText(ExceptedFileName);
+            var expectedProject = new Project();
+            expectedProject = CreateExpectedProject();
+            var expectedFileContent = File.ReadAllText(ExpectedFileName);
 
             if (Directory.Exists(DirectoryInformation + @"\actualProject.json"))
             {
@@ -65,7 +67,7 @@ namespace NoteApp.UnitTests
 
             // Act
             var actualFileName = DirectoryInformation + @"\actualProject.json";
-            ProjectManager.SaveToFile(exceptedProject, actualFileName);
+            ProjectManager.SaveToFile(expectedProject, actualFileName);
             var actualFileContent = File.ReadAllText(actualFileName);
 
             // Assert
@@ -74,23 +76,25 @@ namespace NoteApp.UnitTests
             Assert.AreEqual(expectedFileContent, actualFileContent);
         }
 
+        private readonly string Papka = AppDomain.CurrentDomain.BaseDirectory + @"\Testing";
+
         [Test(Description = "Загрузка  сохраненного файла проекта")]
         public void Test_LoadFromFile_CorrectProject_CorrectLoadedFile()
         {
             // Setup
-            var exceptedProject = new Project();
-            exceptedProject = CreateExceptedProject();
+            var expectedProject = new Project();
+            expectedProject = CreateExpectedProject();
 
             // Act
-            var actualProject = ProjectManager.LoadFromFile(ExceptedFileName);
+            var actualProject = ProjectManager.LoadFromFile(ExpectedFileName);
 
             // Assert
-            Assert.AreEqual(exceptedProject.Notes.Count, actualProject.Notes.Count);
+            Assert.AreEqual(expectedProject.Notes.Count, actualProject.Notes.Count);
             Assert.Multiple(() =>
             {
-                for (int i = 0; i < exceptedProject.Notes.Count; i++)
+                for (int i = 0; i < expectedProject.Notes.Count; i++)
                 {
-                    Assert.AreEqual(exceptedProject.Notes[i], actualProject.Notes[i]);
+                    Assert.AreEqual(expectedProject.Notes[i], actualProject.Notes[i]);
                 }
             });
         }
@@ -109,10 +113,10 @@ namespace NoteApp.UnitTests
             Assert.AreEqual(actualProject.Notes.Count, 0);
         }
 
-        public Project CreateExceptedProject()
+        public Project CreateExpectedProject()
         {
-            var exceptedProject = new Project();
-            exceptedProject.Notes.Add(new Note()
+            var expectedProject = new Project();
+            expectedProject.Notes.Add(new Note()
             {
                 Name = "note1",
                 Text = "text1",
@@ -120,8 +124,8 @@ namespace NoteApp.UnitTests
                 CreatedTime = new DateTime(2022, 01, 19),
                 ModifiedTime = new DateTime(2022, 01, 19)
             });
-            ProjectManager.SaveToFile(exceptedProject, ExceptedFileName);
-            return exceptedProject;
+            ProjectManager.SaveToFile(expectedProject, Papka );
+            return expectedProject;
         }
     }
 }
