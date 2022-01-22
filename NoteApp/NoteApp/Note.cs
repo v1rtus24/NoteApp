@@ -64,11 +64,6 @@ namespace NoteApp
         public DateTime ModifiedTime { get; set; }
 
         /// <summary>
-        /// Индекс текущей заметки
-        /// </summary>
-        public int IndexNote { get; set; }
-
-        /// <summary>
         /// Конструктор, для установки значений 
         /// </summary>
         /// <param name="name"></param>

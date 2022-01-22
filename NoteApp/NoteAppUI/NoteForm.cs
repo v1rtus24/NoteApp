@@ -29,6 +29,7 @@ namespace NoteAppUI
             InitializeComponent();
             var categories = Enum.GetValues(typeof(NoteCategory)).Cast<object>().ToArray();
             CategoryComboBox.Items.AddRange(categories);
+            CategoryComboBox.SelectedIndex = 0;
         }
 
         /// <summary>

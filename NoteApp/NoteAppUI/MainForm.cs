@@ -20,12 +20,12 @@ namespace NoteAppUI
         /// <summary>
         /// Поле, содержащее список заметок
         /// </summary>
-        public Project project { get; set; }
+        private Project CurrentProject { get; set; }
 
         /// <summary>
         /// Список отсортированных заметок
         /// </summary>
-        public Project projectSort { get; set; }
+        private List<Note> projectSort { get; set; }
 
         /// <summary>
         /// Конструктор класса
@@ -33,16 +33,16 @@ namespace NoteAppUI
         public MainForm()
         {
             InitializeComponent();
-            project = ProjectManager.LoadFromFile(ProjectManager.FilePath);
-            projectSort = new Project();
+            CurrentProject = ProjectManager.LoadFromFile(ProjectManager.FilePath);
+            projectSort = new List<Note>();
             UpdateListBox();
             var categories = Enum.GetValues(typeof(NoteCategory)).Cast<object>().ToArray();
             CategoryComboBox.Items.Add("All");
             CategoryComboBox.Items.AddRange(categories);
-            if (project.CurrentNote == -1)
+            if (CurrentProject.CurrentNote == -1)
                 ClearInfo();
             else
-                NotesListBox.SelectedIndex = project.CurrentNote;
+                NotesListBox.SelectedIndex = CurrentProject.CurrentNote;
         }
 
         /// <summary>
@@ -53,20 +53,19 @@ namespace NoteAppUI
             NotesListBox.Items.Clear();
             if ((CategoryComboBox.Text == "All"))
             {
-                project.Notes = project.SortList();
-                for (int i = 0; i < project.Notes.Count; i++)
+                CurrentProject.Notes = CurrentProject.SortList();
+                for (int i = 0; i < CurrentProject.Notes.Count; i++)
                 {
-                    project.Notes[i].IndexNote = i;
-                    NotesListBox.Items.Add(project.Notes[i].Name);
+                    NotesListBox.Items.Add(CurrentProject.Notes[i].Name);
                 }
             }
             else
             {
                 var category = (NoteCategory)CategoryComboBox.SelectedIndex - 1;
-                projectSort.Notes = project.SortList(category);
-                for (int i = 0; i < projectSort.Notes.Count; i++)
+                projectSort = CurrentProject.SortList(category);
+                for (int i = 0; i < projectSort.Count; i++)
                 {
-                    NotesListBox.Items.Add(projectSort.Notes[i].Name);
+                    NotesListBox.Items.Add(projectSort[i].Name);
                 }
             }
         }
@@ -76,24 +75,15 @@ namespace NoteAppUI
         /// </summary>
         private void ShowNoteInfo()
         {
-            if (CategoryComboBox.Text == "All")
-            {
-                var note = project.Notes[NotesListBox.SelectedIndex];
-                TitleLabel.Text = note.Name;
-                notesTextBox.Text = note.Text;
-                CreatedDateTimePicker.Value = note.CreatedTime;
-                ModifiedDateTimePicker.Value = note.ModifiedTime;
-                CategoryLabel.Text = note.Category.ToString();
-            }
-            else
-            {
-                var note = projectSort.Notes[NotesListBox.SelectedIndex];
-                TitleLabel.Text = note.Name;
-                notesTextBox.Text = note.Text;
-                CreatedDateTimePicker.Value = note.CreatedTime;
-                ModifiedDateTimePicker.Value = note.ModifiedTime;
-                CategoryLabel.Text = note.Category.ToString();
-            }
+            var showProject = CategoryComboBox.Text == "All" ? CurrentProject.Notes : projectSort;
+            
+            var note = showProject[NotesListBox.SelectedIndex];
+            TitleLabel.Text = note.Name;
+            notesTextBox.Text = note.Text;
+            CreatedDateTimePicker.Value = note.CreatedTime;
+            ModifiedDateTimePicker.Value = note.ModifiedTime;
+            CategoryLabel.Text = note.Category.ToString();
+
         }
 
         /// <summary>
@@ -111,9 +101,9 @@ namespace NoteAppUI
                 }
                 ShowNoteInfo();
             }
-            catch
+            catch (Exception ex)
             {
-                return;
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -125,12 +115,11 @@ namespace NoteAppUI
             NoteForm form = new NoteForm();
             if (form.ShowDialog() == DialogResult.OK)
             {
-                project.Notes.Add(form.CurrentNote);
+                CurrentProject.Notes.Add(form.CurrentNote);
                 UpdateListBox();
                 if (NotesListBox.Items.Count > 0)
                     NotesListBox.SelectedIndex = 0;
-                else
-                    return;
+                ProjectManager.SaveToFile(CurrentProject, ProjectManager.FilePath);
             }
         }
         /// <summary>
@@ -150,58 +139,35 @@ namespace NoteAppUI
         {
             if (NotesListBox.SelectedIndex != -1)
             {
-                if (CategoryComboBox.Text == "All")
-                {
-                    NoteForm form = new NoteForm();
-                    form.CurrentNote = project.Notes[NotesListBox.SelectedIndex];
+                var showProject = CategoryComboBox.Text == "All" ? CurrentProject.Notes : projectSort;
 
-                    if (form.ShowDialog() == DialogResult.OK)
+                NoteForm form = new NoteForm();
+                form.CurrentNote = showProject[NotesListBox.SelectedIndex];
+
+                if (form.ShowDialog() == DialogResult.OK)
+                {
+                    showProject[NotesListBox.SelectedIndex].Name = form.CurrentNote.Name;
+                    showProject[NotesListBox.SelectedIndex].Text = form.CurrentNote.Text;
+                    showProject[NotesListBox.SelectedIndex].Category = form.CurrentNote.Category;
+                    showProject[NotesListBox.SelectedIndex].ModifiedTime = form.CurrentNote.ModifiedTime;
+                    UpdateListBox();
+                    if (NotesListBox.Items.Count > 0)
                     {
-                        project.Notes[NotesListBox.SelectedIndex].Name = form.CurrentNote.Name;
-                        project.Notes[NotesListBox.SelectedIndex].Text = form.CurrentNote.Text;
-                        project.Notes[NotesListBox.SelectedIndex].Category = form.CurrentNote.Category;
-                        project.Notes[NotesListBox.SelectedIndex].ModifiedTime = form.CurrentNote.ModifiedTime;
-                        UpdateListBox();
-                        if (NotesListBox.Items.Count > 0)
-                        {
-                            NotesListBox.SelectedIndex = 0;
-                        }
-                        else
-                        {
-                            ClearInfo();
-                            return;
-                        }
-                        ShowNoteInfo();
+                        NotesListBox.SelectedIndex = 0;
                     }
+                    else
+                    {
+                        ClearInfo();
+                        return;
+                    }
+
+                    ShowNoteInfo();
+                    ProjectManager.SaveToFile(CurrentProject, ProjectManager.FilePath);
                 }
                 else
                 {
-                    NoteForm form = new NoteForm();
-                    form.CurrentNote = projectSort.Notes[NotesListBox.SelectedIndex];
-                    if (form.ShowDialog() == DialogResult.OK)
-                    {
-                        projectSort.Notes[NotesListBox.SelectedIndex].Name = form.CurrentNote.Name;
-                        projectSort.Notes[NotesListBox.SelectedIndex].Text = form.CurrentNote.Text;
-                        projectSort.Notes[NotesListBox.SelectedIndex].Category = form.CurrentNote.Category;
-                        projectSort.Notes[NotesListBox.SelectedIndex].ModifiedTime = form.CurrentNote.ModifiedTime;
-                        UpdateListBox();
-                        if (NotesListBox.Items.Count > 0)
-                        {
-                            NotesListBox.SelectedIndex = 0;
-                        }
-                        else
-                        {
-                            ClearInfo();
-                            return;
-                        }
-                        ShowNoteInfo();
-                    }
+                    MessageBox.Show("Не выбрана заметка!");
                 }
-
-            }
-            else
-            {
-                MessageBox.Show("Не выбрана заметка!");
             }
         }
 
@@ -233,58 +199,28 @@ namespace NoteAppUI
         {
             if (NotesListBox.SelectedIndex != -1)
             {
-                if (CategoryComboBox.Text == "All")
+                DialogResult result = MessageBox.Show("Do you want to remove this note: " + 
+                                                      CurrentProject.Notes[NotesListBox.SelectedIndex].Name + "", 
+                    "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+                if (result == DialogResult.OK)
                 {
-                    DialogResult result = MessageBox.Show("Do you want to remove this note: " + project.Notes[NotesListBox.SelectedIndex].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-                    if (result == DialogResult.OK)
+                    CurrentProject.Notes.RemoveAt(NotesListBox.SelectedIndex);
+                    UpdateListBox();
+                    if (NotesListBox.Items.Count > 0)
                     {
-                        project.Notes.Remove(project.Notes[NotesListBox.SelectedIndex]);
-
-                        UpdateListBox();
-                        if (NotesListBox.Items.Count > 0)
-                        {
-                            NotesListBox.SelectedIndex = 0;
-                        }
-                        else if (NotesListBox.Items.Count == 0)
-                        {
-                            ClearInfo();
-                        }
+                        NotesListBox.SelectedIndex = 0;
                     }
-
-                    if (result == DialogResult.Cancel)
+                    else if (NotesListBox.Items.Count == 0)
                     {
-                        DialogResult = DialogResult.Cancel;
+                        ClearInfo();
                     }
                 }
-                else
+                if (result == DialogResult.Cancel)
                 {
-                    DialogResult result = MessageBox.Show("Do you want to remove this note: " + projectSort.Notes[NotesListBox.SelectedIndex].Name + "", "Remove Note", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-
-                    if (result == DialogResult.OK)
-                    {
-                        for (int i = 0; i < project.Notes.Count; i++)
-                        {
-                            if (project.Notes[i].IndexNote == projectSort.Notes[NotesListBox.SelectedIndex].IndexNote)
-                            {
-                                project.Notes.RemoveAt(i);
-                            }
-                        }
-                        UpdateListBox();
-                        if (NotesListBox.Items.Count > 0)
-                        {
-                            NotesListBox.SelectedIndex = 0;
-                        }
-                        else if (NotesListBox.Items.Count == 0)
-                        {
-                            ClearInfo();
-                        }
-                    }
-                    if (result == DialogResult.Cancel)
-                    {
-                        DialogResult = DialogResult.Cancel;
-                    }
+                    DialogResult = DialogResult.Cancel;
                 }
+                ProjectManager.SaveToFile(CurrentProject, ProjectManager.FilePath);
             }
             else
             {
@@ -309,8 +245,8 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            project.CurrentNote = NotesListBox.SelectedIndex;
-            ProjectManager.SaveToFile(project, ProjectManager.FilePath);
+            CurrentProject.CurrentNote = NotesListBox.SelectedIndex;
+            ProjectManager.SaveToFile(CurrentProject, ProjectManager.FilePath);
         }
 
         /// <summary>
@@ -320,8 +256,8 @@ namespace NoteAppUI
         /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            project.CurrentNote = NotesListBox.SelectedIndex;
-            ProjectManager.SaveToFile(project, ProjectManager.FilePath);
+            CurrentProject.CurrentNote = NotesListBox.SelectedIndex;
+            ProjectManager.SaveToFile(CurrentProject, ProjectManager.FilePath);
             Application.Exit();
         }
 
@@ -356,8 +292,6 @@ namespace NoteAppUI
             {
                 ClearInfo();
             }
-            else
-                return;
         }
 
         private void ClearInfo()
