@@ -48,7 +48,6 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>
-    </PostBuildEvent>
+    <PostBuildEvent>"$(SolutionDir)\Installer\InstallScripts\installer.iss"</PostBuildEvent>
   </PropertyGroup>
 </Project>
