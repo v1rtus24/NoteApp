@@ -3,8 +3,8 @@
 
 #define MyAppName "NoteApp"
 #define MyAppVersion "1.0"
-#define MyAppPublisher "Panteleev Vladislav"
-#define MyAppURL "https://github.com/v1rtus24/NoteApp"
+#define MyAppPublisher "Panteleev Vlasislav"
+#define MyAppURL "https://github.com/v1rtus24"
 #define MyAppExeName "NoteAppUI.exe"
 #define MyAppAssocName MyAppName + " File"
 #define MyAppAssocExt ".myp"
@@ -27,7 +27,7 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir="installers"
+OutputDir="Installers"
 OutputBaseFilename=NoteAppSetup
 SetupIconFile="..\..\NoteAppUI\{#AppIconName}"
 Compression=lzma
