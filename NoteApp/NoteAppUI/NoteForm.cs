@@ -49,7 +49,7 @@ namespace NoteAppUI
                 }
                 else
                 {
-                    MessageBox.Show("Не выбрана категория заметки!");
+                    MessageBox.Show("Note category not selected!");
                 }
             }
             catch(ArgumentException ex)

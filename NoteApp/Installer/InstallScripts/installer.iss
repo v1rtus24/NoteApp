@@ -27,7 +27,7 @@ ChangesAssociations=yes
 DisableProgramGroupPage=yes
 ; Uncomment the following line to run in non administrative install mode (install for current user only.)
 ;PrivilegesRequired=lowest
-OutputDir="Installers"
+OutputDir="installers"
 OutputBaseFilename=NoteAppSetup
 SetupIconFile="..\..\NoteAppUI\{#AppIconName}"
 Compression=lzma
@@ -52,3 +52,4 @@ Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFileN
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
+

@@ -25,7 +25,7 @@ namespace NoteAppUI
         /// <summary>
         /// Список отсортированных заметок
         /// </summary>
-        private List<Note> projectSort { get; set; }
+        private List<Note> NotesSort { get; set; }
 
         /// <summary>
         /// Конструктор класса
@@ -34,7 +34,7 @@ namespace NoteAppUI
         {
             InitializeComponent();
             CurrentProject = ProjectManager.LoadFromFile(ProjectManager.FilePath);
-            projectSort = new List<Note>();
+            NotesSort = new List<Note>();
             UpdateListBox();
             var categories = Enum.GetValues(typeof(NoteCategory)).Cast<object>().ToArray();
             CategoryComboBox.Items.Add("All");
@@ -62,10 +62,10 @@ namespace NoteAppUI
             else
             {
                 var category = (NoteCategory)CategoryComboBox.SelectedIndex - 1;
-                projectSort = CurrentProject.SortList(category);
-                for (int i = 0; i < projectSort.Count; i++)
+                NotesSort = CurrentProject.SortList(category);
+                for (int i = 0; i < NotesSort.Count; i++)
                 {
-                    NotesListBox.Items.Add(projectSort[i].Name);
+                    NotesListBox.Items.Add(NotesSort[i].Name);
                 }
             }
         }
@@ -75,7 +75,7 @@ namespace NoteAppUI
         /// </summary>
         private void ShowNoteInfo()
         {
-            var showProject = CategoryComboBox.Text == "All" ? CurrentProject.Notes : projectSort;
+            var showProject = CategoryComboBox.Text == "All" ? CurrentProject.Notes : NotesSort;
             
             var note = showProject[NotesListBox.SelectedIndex];
             TitleLabel.Text = note.Name;
@@ -139,7 +139,7 @@ namespace NoteAppUI
         {
             if (NotesListBox.SelectedIndex != -1)
             {
-                var showProject = CategoryComboBox.Text == "All" ? CurrentProject.Notes : projectSort;
+                var showProject = CategoryComboBox.Text == "All" ? CurrentProject.Notes : NotesSort;
 
                 NoteForm form = new NoteForm();
                 form.CurrentNote = showProject[NotesListBox.SelectedIndex];
@@ -166,7 +166,7 @@ namespace NoteAppUI
                 }
                 else
                 {
-                    MessageBox.Show("Не выбрана заметка!");
+                    MessageBox.Show("Note not selected!");
                 }
             }
         }
@@ -224,7 +224,7 @@ namespace NoteAppUI
             }
             else
             {
-                MessageBox.Show("Не выбрана заметка!");
+                MessageBox.Show("Note not selected!");
             }
         }
 
