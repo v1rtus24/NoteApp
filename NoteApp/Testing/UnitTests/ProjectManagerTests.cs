@@ -76,8 +76,6 @@ namespace NoteApp.UnitTests
             Assert.AreEqual(expectedFileContent, actualFileContent);
         }
 
-        private readonly string Papka = AppDomain.CurrentDomain.BaseDirectory + @"\Testing";
-
         [Test(Description = "Загрузка  сохраненного файла проекта")]
         public void Test_LoadFromFile_CorrectProject_CorrectLoadedFile()
         {
@@ -124,7 +122,7 @@ namespace NoteApp.UnitTests
                 CreatedTime = new DateTime(2022, 01, 19),
                 ModifiedTime = new DateTime(2022, 01, 19)
             });
-            ProjectManager.SaveToFile(expectedProject, Papka );
+            ProjectManager.SaveToFile(expectedProject, ExpectedFileName );
             return expectedProject;
         }
     }
