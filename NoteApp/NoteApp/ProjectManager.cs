@@ -1,4 +1,4 @@
-п»їusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,19 +8,19 @@ using System.IO;
 
 namespace NoteApp
 {
-    /// <summary>
-    /// РљР»Р°СЃСЃ "РњРµРЅРµРґР¶РµСЂ РџСЂРѕРµРєС‚Р°", РѕС‚РІРµС‡Р°СЋС‰РёР№ Р·Р° Р·Р°РіСЂСѓР·РєСѓ Рё РІС‹РіСЂСѓР·РєСѓ РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
-    /// </summary>
+    	/// <summary>
+	/// Класс "Менеджер Проекта", отвечающий за загрузку и выгрузку данных из файла
+	/// </summary>
     public static class ProjectManager
     {
         /// <summary>
-        /// Р’РѕР·РІСЂР°С‰Р°РµС‚ Рё Р·Р°РґР°РµС‚ РїСѓС‚СЊ РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ Рє С„Р°Р№Р»Сѓ>. 
+        /// Возвращает и задает путь по умолчанию к файлу>. 
         /// </summary>
         public static string FilePath { get; set; } = Environment.GetFolderPath(
             Environment.SpecialFolder.ApplicationData) + @"\NoteApp\NoteApp.notes";
 
         /// <summary>
-        /// РњРµС‚РѕРґ СЃРѕС…СЂР°РЅРµРЅРёСЏ РґР°РЅРЅС‹С… РІ С„Р°Р№Р»
+        /// Метод сохранения данных в файл
         /// </summary>
         /// <param name="notes"></param>
         public static void SaveToFile(Project notes,string filePath)
@@ -30,17 +30,17 @@ namespace NoteApp
                 Directory.CreateDirectory(Path.GetDirectoryName(filePath));
             }
             JsonSerializer serializer = new JsonSerializer();
-            //РћС‚РєСЂС‹РІР°РµРј РїРѕС‚РѕРє РґР»СЏ Р·Р°РїРёСЃРё РІ С„Р°Р№Р» СЃ СѓРєР°Р·Р°РЅРёРµРј РїСѓС‚Рё
+            //Открываем поток для записи в файл с указанием пути
             using (StreamWriter sw = new StreamWriter(filePath))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
-                //Р’С‹Р·С‹РІР°РµРј СЃРµСЂРёР°Р»РёР·Р°С†РёСЋ Рё РїРµСЂРµРґР°РµРј РѕР±СЉРµРєС‚, РєРѕС‚РѕСЂС‹Р№ С…РѕС‚РёРј СЃРµСЂРёР°Р»РёР·РѕРІР°С‚СЊ
+                //Вызываем сериализацию и передаем объект, который хотим сериализовать
                 serializer.Serialize(writer, notes);
             }
         }
         
         /// <summary>
-        /// РњРµС‚РѕРґ Р·Р°РіСЂСѓР·РєРё РґР°РЅРЅС‹С… РёР· С„Р°Р№Р»Р°
+        /// Метод загрузки данных из файла
         /// </summary>
         /// <returns></returns>
         public static Project LoadFromFile(string filePath)
@@ -52,11 +52,11 @@ namespace NoteApp
             try
             {
                 JsonSerializer serializer = new JsonSerializer();
-                //РћС‚РєСЂС‹РІР°РµРј РїРѕС‚РѕРє РґР»СЏ С‡С‚РµРЅРёСЏ РёР· С„Р°Р№Р»Р° СЃ СѓРєР°Р·Р°РЅРёРµРј РїСѓС‚Рё
+                //Открываем поток для чтения из файла с указанием пути
                 using (StreamReader sr = new StreamReader(filePath))
                 using (JsonReader reader = new JsonTextReader(sr))
                 {
-                    //Р’С‹Р·С‹РІР°РµРј РґРµСЃРµСЂРёР°Р»РёР·Р°С†РёСЋ Рё СЏРІРЅРѕ РїСЂРµРѕР±СЂР°Р·СѓРµРј СЂРµР·СѓР»СЊС‚Р°С‚ РІ С†РµР»РµРІРѕР№ С‚РёРї РґР°РЅРЅС‹С…
+                    //Вызываем десериализацию и явно преобразуем результат в целевой тип данных
                     return (Project)serializer.Deserialize<Project>(reader);
                 }
             }

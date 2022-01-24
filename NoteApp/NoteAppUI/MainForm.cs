@@ -164,10 +164,10 @@ namespace NoteAppUI
                     ShowNoteInfo();
                     ProjectManager.SaveToFile(CurrentProject, ProjectManager.FilePath);
                 }
-                else
-                {
-                    MessageBox.Show("Note not selected!");
-                }
+            }
+            else
+            {
+                MessageBox.Show("Note not selected!");
             }
         }
 

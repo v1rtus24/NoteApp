@@ -1,4 +1,4 @@
-п»їusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,36 +6,36 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    /// <summary>
-    /// РљР»Р°СЃСЃ "РџСЂРѕРµРєС‚", СЃРѕРґРµСЂР¶РёС‚ СЃРїРёСЃРѕРє РІСЃРµС… Р·Р°РјРµС‚РѕРє
-    /// </summary>
+    	/// <summary>
+	/// Класс "Проект", содержит список всех заметок
+	/// </summary>
     public class Project
     {
         /// <summary>
-        /// РЎРїРёСЃРѕРє Р·Р°РјРµС‚РѕРє
+        /// Список заметок
         /// </summary>
         public List<Note> Notes { get; set; } = new List<Note>();
 
         /// <summary>
-		/// РЎРІРѕР№СЃС‚РІРѕ С‚РµРєСѓС‰РµР№ Р·Р°РјРµС‚РєРё.
+		/// Свойство текущей заметки.
 		/// </summary>
 		public int CurrentNote { get; set; } = -1;
 
 
         /// <summary>
-        /// РћСЂРіР°РЅРёР·РѕРІР°С‚СЊ СЃРїРёСЃРѕРє РїРѕ РґР°С‚Рµ СЃРѕР·РґР°РЅРёСЏ Р·Р°РјРµС‚РѕРє
+        /// Организовать список по дате создания заметок
         /// </summary>
-        /// <returns>РЎРїРёСЃРѕРє РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅС‹С… Р·Р°РјРµС‚РѕРє</returns>
+        /// <returns>Список отсортированных заметок</returns>
         public List<Note> SortList()
         {
             return Notes.OrderByDescending(t => t.ModifiedTime).ToList();
         }
 
         /// <summary>
-        /// РћСЂРіР°РЅРёР·РѕРІР°С‚СЊ СЃРїРёСЃРѕРє Р·Р°РјРµС‚РѕРє РїРѕ РґР°С‚Рµ СЃРѕР·РґР°РЅРёСЏ Рё РѕС‚С„РёР»СЊС‚СЂРѕРІР°С‚СЊ РїРѕ РєР°С‚РµРіРѕСЂРёРё
+        /// Организовать список заметок по дате создания и отфильтровать по категории
         /// </summary>
-        /// <param name="category">РљР°С‚РµРіРѕСЂРёСЏ Р·Р°РјРµС‚РєРё</param>
-        /// <returns>РЎРїРёСЃРѕРє РѕС‚С„РёР»СЊС‚СЂРѕРІР°РЅРЅС‹С… Р·Р°РјРµС‚РѕРє</returns>
+        /// <param name="category">Категория заметки</param>
+        /// <returns>Список отфильтрованных заметок</returns>
         public List<Note> SortList(NoteCategory category)
         {
             List<Note> SortedList = new List<Note>();

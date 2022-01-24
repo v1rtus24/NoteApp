@@ -97,6 +97,20 @@ namespace NoteApp.UnitTests
             });
         }
 
+        [Test(Description = "Попытка загрузки некорректного проекта из файла")]
+        public void Test_LoadFromFile_LoadCorruptedProject_ReturnsEmptyProject()
+        {
+            //Setup
+            var wrongFileName = DirectoryInformation + "wrong";
+
+
+            // Act
+            var actualProject = ProjectManager.LoadFromFile(wrongFileName);
+
+            // Assert
+            Assert.AreEqual(actualProject.Notes.Count, 0);
+        }
+
         [Test(Description = "Попытка загрузки проекта из несуществующего файла")]
         public void Test_LoadFromFile_LoadNonExistentProject_ReturnsEmptyProject()
         {

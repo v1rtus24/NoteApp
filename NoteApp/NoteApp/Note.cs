@@ -1,4 +1,4 @@
-п»їusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,18 +8,18 @@ using System.Threading.Tasks;
 namespace NoteApp
 {
    
-   /// <summary>
-   /// РљР»Р°СЃСЃ "Р—Р°РјРµС‚РєР°"
-   /// </summary>
+   	/// <summary>
+	/// Класс "Заметка"
+	/// </summary>
     public class Note : ICloneable
     {
         /// <summary>
-        /// "РќР°Р·РІР°РЅРёРµ Р·Р°РјРµС‚РєРё"
+        /// "Название заметки"
         /// </summary>
         private string _name;
 
         /// <summary>
-        /// РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СЏ "РќР°Р·РІР°РЅРёРµ Р·Р°РјРµС‚РєРё"
+        /// Свойство для поля "Название заметки"
         /// </summary>
         public string Name
         {
@@ -31,12 +31,12 @@ namespace NoteApp
             {
                 if (value.Length == 0)
                 {
-                    _name = "Р‘РµР· РЅР°Р·РІР°РЅРёСЏ";
+                    _name = "Без названия";
                     return;
                 }
                 if (value.Length > 50)
                 {
-                    throw new ArgumentException("Р”Р»РёРЅР° РЅР°Р·РІР°РЅРёСЏ Р±РѕР»СЊС€Рµ 50 СЃРёРјРѕРІР»РѕРІ!");
+                    throw new ArgumentException("Длина названия больше 50 симовлов!");
                 }
                 else
                     _name = value;
@@ -44,27 +44,27 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СЏ "РљР°С‚РµРіРѕСЂРёСЏ Р·Р°РјРµС‚РєРё"
+        /// Свойство для поля "Категория заметки"
         /// </summary>
         public NoteCategory Category { get; set; }
 
         /// <summary>
-        /// РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СЏ "РўРµРєСЃС‚ Р·Р°РјРµС‚РєРё"
+        /// Свойство для поля "Текст заметки"
         /// </summary>
         public string Text { get; set; }
         /// <summary>
-        /// РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СЏ "Р’СЂРµРјСЏ СЃРѕР·РґР°РЅРёСЏ Р·Р°РјРµС‚РєРё"
+        /// Свойство для поля "Время создания заметки"
         /// </summary>
 
         public DateTime CreatedTime { get; set; }
 
         /// <summary>
-        /// РЎРІРѕР№СЃС‚РІРѕ РґР»СЏ РїРѕР»СЏ "Р’СЂРµРјСЏ РїРѕСЃР»РµРґРЅРµРіРѕ СЂРµРґР°РєС‚РёСЂРѕРІР°РЅРёСЏ"
+        /// Свойство для поля "Время последнего редактирования"
         /// </summary>
         public DateTime ModifiedTime { get; set; }
 
         /// <summary>
-        /// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ, РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё Р·РЅР°С‡РµРЅРёР№ 
+        /// Конструктор, для установки значений 
         /// </summary>
         /// <param name="name"></param>
         /// <param name="text"></param>
@@ -79,12 +79,12 @@ namespace NoteApp
             
         }
         /// <summary>
-        /// РџСѓСЃС‚РѕР№ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+        /// Пустой конструктор
         /// </summary>
         public Note() { }
 
         /// <summary>
-        /// РњРµС‚РѕРґ, РєРѕС‚РѕСЂС‹Р№ РІРѕР·РІСЂР°С‰Р°РµС‚ РєРѕРїРёСЋ РѕР±СЉРµРєС‚Р°
+        /// Метод, который возвращает копию объекта
         /// </summary>
         /// <returns></returns>
         public object Clone()
@@ -93,10 +93,10 @@ namespace NoteApp
         }
 
         /// <summary>
-        /// РЎСЂР°РІРЅРёРІР°РµС‚ Р·РЅР°С‡РµРЅРёСЏ РґРІСѓС… Р·Р°РјРµС‚РѕРє
+        /// Сравнивает значения двух заметок
         /// </summary>
-        /// <param name="obj">Р—Р°РјРµС‚РєР°, СЃ РєРѕС‚РѕСЂРѕР№ РёРґРµС‚ СЃСЂР°РІРЅРµРЅРёРµ</param>
-        /// <returns>true, РµСЃР»Рё РІСЃРµ РїРѕР»СЏ РѕРґРЅРѕР№ Р·Р°РјРµС‚РєРё СЃРѕРІРїР°РґР°СЋС‚ СЃ РґСЂСѓРіРѕР№, РёРЅР°С‡Рµ - false</returns>
+        /// <param name="obj">Заметка, с которой идет сравнение</param>
+        /// <returns>true, если все поля одной заметки совпадают с другой, иначе - false</returns>
         public override bool Equals(object obj)
         {
             if (!(obj is Note other))

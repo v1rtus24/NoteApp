@@ -1,4 +1,4 @@
-п»їusing System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,38 +6,42 @@ using System.Threading.Tasks;
 
 namespace NoteApp
 {
-    /// <summary>
-    /// РџРµСЂРµС‡РёСЃР»РµРЅРёРµ "РљР°С‚РµРіРѕСЂРёСЏ Р·Р°РјРµС‚РєРё"
-    /// </summary>
-    public enum NoteCategory
+    	/// <summary>
+	/// Перечисление "Категория заметки"
+	/// </summary>
+    public enum NoteCategory : int
     {
-        /// <summary>
-        /// РљР°С‚РµРіРѕСЂРёСЏ "Р Р°Р±РѕС‚Р°"
-        /// </summary>
-        Work,
-        /// <summary>
-        /// РљР°С‚РµРіРѕСЂРёСЏ "Р”РѕРј"
-        /// </summary>
-        Home,
-        /// <summary>
-        /// РљР°С‚РµРіРѕСЂРёСЏ "Р—РґРѕСЂРѕРІСЊРµ Рё РЎРїРѕСЂС‚"
-        /// </summary>
-        HealthAndSports,
-        /// <summary>
-        /// РљР°С‚РµРіРѕСЂРёСЏ "Р›СЋРґРё"
-        /// </summary>
-        People,
-        /// <summary>
-        /// РљР°С‚РµРіРѕСЂРёСЏ "Р”РѕРєСѓРјРµРЅС‚С‹"
-        /// </summary>
-        Documents,
-        /// <summary>
-        /// РљР°С‚РµРіРѕСЂРёСЏ "Р¤РёРЅР°РЅСЃС‹"
-        /// </summary>
-        Finance,
-        /// <summary>
-        /// РљР°С‚РµРіРѕСЂРёСЏ "Р Р°Р·РЅРѕРµ"
-        /// </summary>
-        Other
-    }
+
+
+		/// <summary>
+		/// Категория "Работа"
+		/// </summary>
+		Work,
+		/// <summary>
+		/// Категория "Дом"
+		/// </summary>
+		Home,
+		/// <summary>
+		/// Категория "Здоровье и Спорт"
+		/// </summary>
+		HealthAndSports,
+		/// <summary>
+		/// Категория "Люди"
+		/// </summary>
+		People,
+		/// <summary>
+		/// Категория "Документы"
+		/// </summary>
+		Documents,
+		/// <summary>
+		/// Категория "Финансы"
+		/// </summary>
+		Finance,
+		/// <summary>
+		/// Категория "Разное"
+		/// </summary>
+		Other
+
+
+	}
 }
