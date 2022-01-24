@@ -13,6 +13,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NoteApp.UnitTests", "Testin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Installer", "Installer\Installer.csproj", "{C0A7A16C-6250-48A2-A2A0-50E133160CE3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentations", "Documentations", "{472637F4-2A43-45E5-9779-6D4C7BB529B7}"
+	ProjectSection(SolutionItems) = preProject
+		Documentations\Календарный план NoteApp.docx = Documentations\Календарный план NoteApp.docx
+		Documentations\Пояснительная записка NoteApp.docx = Documentations\Пояснительная записка NoteApp.docx
+		Documentations\Ретроспектива NoteApp.docx = Documentations\Ретроспектива NoteApp.docx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
